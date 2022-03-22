@@ -1,10 +1,9 @@
-import {Component, useEffect} from "react";
-import {Property} from "./propertyService";
-import OnepointMethod from "../methods/root_of_equation/onepoint";
-import FalsePositionMethod from "../methods/root_of_equation/falseposition";
-import {DesmosChart} from "../components/desmoschart";
-import {ApexChart} from "../components/apexchart";
-
+import React, {ChangeEvent, Component, FormEvent, FunctionComponent} from "react";
+import {Bisection, FalsePosition, OnePoint, Property} from "./serviceproperty";
+import {DesmosChart} from "../components/desmoschart/desmoschart";
+import {ApexChart} from "../components/apexchart/apexchart";
+import {Method} from "@testing-library/react";
+import BisectionMethod from "../methods/root_of_equation/bisection/bisection";
 
 class Service extends Component<any,Property> {
     constructor(props?:any) {
@@ -13,31 +12,25 @@ class Service extends Component<any,Property> {
             Epsilon:Math.pow(10,-6),
             Equation:"2-e^x",
             Error:0,
-            Method:{Bisection:{Xl:7,Xr:9},FalsePosition:{Xl:5,Xr:8},OnePoint:{X:0,Xi:0}}
+            Method:{
+                RootEquation:{
+                    Bisection:{ Xl:1.75 , Xr:2.00 },
+                    FalsePosition:{ Xl:0.02 , Xr:0.03 },
+                    OnePoint:{ X:0 , Xi:0.5 }
+                }
+            },
+            ApexChart:{Series:[],Categories:[]}
         }
-        // let onepoint = new OnepointMethod(),
-        //     falseposition = new FalsePositionMethod();
-        // console.log(onepoint.calculate(0,this.state.Error,this.state.Epsilon,this.state.Equation));
-    }
-    componentDidMount() {
-
-        return(
-            <div>
-                <div>
-                </div>
-                <div>
-                    <h1>Hello</h1>
-                </div>
-            </div>
-        );
     }
     render() {
-
         return(
             <div>
-                <h1>Service</h1>
-                <DesmosChart Equation={"x-4"}></DesmosChart>
-                <ApexChart></ApexChart>
+                <BisectionMethod
+                    Epsilon={this.state.Epsilon}
+                    Equation={this.state.Equation}
+                    Error={this.state.Error}
+                    Method={this.state.Method}
+                />
             </div>
         );
     }

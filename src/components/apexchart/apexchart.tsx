@@ -1,16 +1,17 @@
 import {FunctionComponent} from "react";
 import ReactApexChart from "react-apexcharts";
+import {PropsApexChart, PropsChart} from "../../service/serviceproperty";
 
-export const ApexChart:FunctionComponent <any> = () =>{
-    const series:any = [{ name:"B", data: [10, 41, 35, 51, 49, 62, 69, 91, 148]}] ;
+export const ApexChart:FunctionComponent <PropsApexChart> = (props) =>{
+    const series:any = props.Series ;
     const options:object = {
                 chart: {
-                    height: 350,
+                    height: 800,
                     type: 'line',
                     zoom: {
                         enabled: true,
                         type: 'x',
-                        autoScaleYaxis: false,
+                        autoScaleYaxis: true,
                         zoomedArea: {
                             fill: {
                                 color: '#90CAF9',
@@ -26,10 +27,10 @@ export const ApexChart:FunctionComponent <any> = () =>{
 
                 },
                 dataLabels: {
-                    enabled: true
+                    enabled: false
                 },
                 stroke: {
-                    curve: 'straight'
+                    curve: 'smooth'
                 },
                 title: {
                     text: 'Product Trends by Month',
@@ -42,12 +43,35 @@ export const ApexChart:FunctionComponent <any> = () =>{
                     },
                 },
                 xaxis: {
-                    categories:  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                    categories:  props.Categories,
+                },
+                yaxis: {
+                    min:0
+                },
+                markers: {
+                    size: 5,
+                    colors: undefined,
+                    strokeColors: '#fff',
+                    strokeWidth: 2,
+                    strokeOpacity: 0.9,
+                    strokeDashArray: 0,
+                    fillOpacity: 1,
+                    discrete: [],
+                    shape: "circle",
+                    radius: 2,
+                    offsetX: 0,
+                    offsetY: 0,
+                    onClick: undefined,
+                    onDblClick: undefined,
+                    showNullDataPoints: true,
+                    hover: {
+                        size: undefined,
+                        sizeOffset: 3
+                    }
                 }
             };
     return(
         <div>
-
             <ReactApexChart options={options} series={series} type="line" height={350}></ReactApexChart>
         </div>
     );

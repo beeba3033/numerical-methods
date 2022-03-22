@@ -1,6 +1,6 @@
-import {RootEquation} from "./propertyRootofequation";
+import RootEquation from "./rootofequation";
 
-class OnepointMethod extends RootEquation {
+export default class OnepointMethod extends RootEquation {
     constructor(props?:any) {
         super(props);
     }
@@ -23,4 +23,3 @@ class OnepointMethod extends RootEquation {
         return resultList;
     }
 };
-export default OnepointMethod ;

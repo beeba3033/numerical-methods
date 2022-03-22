@@ -1,6 +1,6 @@
-import {RootEquation} from "./propertyRootofequation";
+import RootEquation from "./rootofequation";
 
-class FalsePositionMethod extends RootEquation{
+export default class FalsePositionMethod extends RootEquation{
     constructor(props?:any) {
         super(props);
     }
@@ -30,4 +30,3 @@ class FalsePositionMethod extends RootEquation{
         return resultList;
     }
 };
-export default FalsePositionMethod;

@@ -1,9 +1,10 @@
-import {Component} from "react";
+import {ChangeEvent, Component, FormEvent} from "react";
+import {Property, PropsCustom, Result} from "../../service/serviceproperty";
 import {parse} from "mathjs";
-import {Property} from "../../service/propertyService";
+import * as React from "react";
 
-export class RootEquation extends Component<any,Property> {
-    constructor(props:any) {
+export default class RootEquation extends Component<PropsCustom,Property> {
+    constructor(props:PropsCustom) {
         super(props);
     }
     function(x:number,equation:string) : number{
