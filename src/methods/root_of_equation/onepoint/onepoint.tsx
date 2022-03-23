@@ -1,4 +1,4 @@
-import RootEquation from "./rootofequation";
+import RootEquation from "../rootofequation";
 
 export default class OnepointMethod extends RootEquation {
     constructor(props?:any) {

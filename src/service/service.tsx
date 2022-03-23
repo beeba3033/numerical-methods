@@ -4,6 +4,23 @@ import {DesmosChart} from "../components/desmoschart/desmoschart";
 import {ApexChart} from "../components/apexchart/apexchart";
 import {Method} from "@testing-library/react";
 import BisectionMethod from "../methods/root_of_equation/bisection/bisection";
+import {Link} from "react-router-dom";
+
+
+
+import {
+    Container,
+    Divider,
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    ThemeProvider
+} from "@mui/material";
+import "./service.css"
+import ListRouter from "../components/customlist/customlist";
+import App from "../App";
 
 class Service extends Component<any,Property> {
     constructor(props?:any) {
@@ -19,19 +36,48 @@ class Service extends Component<any,Property> {
                     OnePoint:{ X:0 , Xi:0.5 }
                 }
             },
-            ApexChart:{Series:[],Categories:[]}
+            ApexChart:{Series:[],Categories:[]},
+            Data:[{}]
         }
     }
     render() {
         return(
-            <div>
-                <BisectionMethod
-                    Epsilon={this.state.Epsilon}
-                    Equation={this.state.Equation}
-                    Error={this.state.Error}
-                    Method={this.state.Method}
-                />
-            </div>
+            <Container>
+                <div className={"Body-Field"}>
+                    <div className={"List-Field"}>
+                        {/*<ListItemButton component="a" href="/Bisection">*/}
+                        {/*    <ListItemText primary="Spam" />*/}
+                        {/*</ListItemButton>*/}
+                        <h1>hello</h1>
+                        {/*<Link to={"/Bisection"}>Bisection</Link>*/}
+                        {/*<Link to={"/"}>F</Link>*/}
+                    </div>
+                    {/*<div>*/}
+                    {/*    <BisectionMethod*/}
+                    {/*        Epsilon={this.state.Epsilon}*/}
+                    {/*        Equation={this.state.Equation}*/}
+                    {/*        Error={this.state.Error}*/}
+                    {/*        Method={this.state.Method}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                </div>
+
+                    {/*<Routes>*/}
+                    {/*    <Route path='/Bisection' element={*/}
+                    {/*                <BisectionMethod*/}
+                    {/*                    Epsilon={this.state.Epsilon}*/}
+                    {/*                    Equation={this.state.Equation}*/}
+                    {/*                    Error={this.state.Error}*/}
+                    {/*                    Method={this.state.Method}*/}
+                    {/*                />*/}
+                    {/*        }*/}
+                    {/*    />*/}
+                        {/*<Route path='/cats' component={Cats} />*/}
+                        {/*<Route path='/sheeps' component={Sheeps} />*/}
+                        {/*<Route path='/goats' component={Goats} />*/}
+                    {/*</Routes>*/}
+            </Container>
+
         );
     }
 };

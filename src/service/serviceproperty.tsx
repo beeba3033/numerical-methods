@@ -23,6 +23,7 @@ export interface Property {
     Method:Methods;
     Result?:Result;
     ApexChart:PropsApexChart;
+    Data:Array<DataTable>
 };
 export interface Methods {
     RootEquation:{
@@ -55,3 +56,25 @@ export interface Series {
     name:string;
     data:Array<number>;
 }
+export interface DataTable {
+    Bisection?:DataBisection;
+    FalsePosition?:DataFalsePosition;
+}
+export interface DataBisection{
+    Xl:number;
+    Xr:number;
+    Xm:number;
+    Fxl:number;
+    Fxr:number;
+    Fxm:number;
+    Error:number;
+};
+export interface DataFalsePosition{
+    Xl:number;
+    Xr:number;
+    X1:number;
+    Fxl:number;
+    Fxr:number;
+    Fx1:number;
+    Error:number;
+};

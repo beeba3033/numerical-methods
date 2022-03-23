@@ -6,6 +6,7 @@
     width: 80%;
     margin: 0 auto;
 }
+
 .Input-Field {
     display: flex;
     flex-flow: column wrap;
@@ -20,4 +21,7 @@
     flex-flow: column wrap;
     gap: 1.2rem;
     margin: 2rem;
+}
+.Table-Field {
+    margin: 2rem 0 4rem;
 }

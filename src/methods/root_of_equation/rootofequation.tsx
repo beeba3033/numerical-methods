@@ -18,6 +18,6 @@ export default class RootEquation extends Component<PropsCustom,Property> {
         return 0 ;
     }
     error(xNew:number,xOld:number) : number{
-        return Math.abs( (xNew-xOld)/xNew );
+        return JSON.parse(Math.abs( (xNew-xOld)/xNew ).toFixed(6));
     }
 }
