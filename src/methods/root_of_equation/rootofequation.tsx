@@ -1,5 +1,5 @@
 import {ChangeEvent, Component, FormEvent} from "react";
-import {Property, PropsCustom, Result} from "../../service/serviceproperty";
+import {DataTable, Property, PropsCustom, Result} from "../../service/serviceproperty";
 import {parse} from "mathjs";
 import * as React from "react";
 
@@ -18,6 +18,14 @@ export default class RootEquation extends Component<PropsCustom,Property> {
         return 0 ;
     }
     error(xNew:number,xOld:number) : number{
-        return JSON.parse(Math.abs( (xNew-xOld)/xNew ).toFixed(6));
+        return Math.abs( (xNew-xOld)/xNew );
+    }
+    listResult(list:Array<number>,data:number):void{
+        if(data!=Infinity){
+            list.push(JSON.parse(data.toFixed(6)));
+        }
+        else{
+            list.push(0);
+        }
     }
 }

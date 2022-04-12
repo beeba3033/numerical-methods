@@ -42,6 +42,7 @@ export interface PropsCustom {
     Equation:string;
     Error:number;
     Method:Methods;
+    Url:string;
 }
 export interface PropsChart {
     Name?:string;
@@ -57,24 +58,11 @@ export interface Series {
     data:Array<number>;
 }
 export interface DataTable {
-    Bisection?:DataBisection;
-    FalsePosition?:DataFalsePosition;
+    X1?:number;
+    X2?:number;
+    X3?:number;
+    Fx1?:number;
+    Fx2?:number;
+    Fx3?:number;
+    Error?:number;
 }
-export interface DataBisection{
-    Xl:number;
-    Xr:number;
-    Xm:number;
-    Fxl:number;
-    Fxr:number;
-    Fxm:number;
-    Error:number;
-};
-export interface DataFalsePosition{
-    Xl:number;
-    Xr:number;
-    X1:number;
-    Fxl:number;
-    Fxr:number;
-    Fx1:number;
-    Error:number;
-};

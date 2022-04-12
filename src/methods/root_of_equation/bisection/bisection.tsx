@@ -5,11 +5,22 @@ import "./bisection.css";
 import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 import {ApexChart} from "../../../components/apexchart/apexchart";
 import {
+    Box,
     Button,
-    Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+    Container,
+    FormControl,
+    InputLabel,
+    Paper,
+    Tab,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Tabs,
     TextField
 } from "@mui/material";
-
 export default class BisectionMethod extends RootEquation {
     constructor(props:PropsCustom) {
         super(props);
@@ -38,17 +49,17 @@ export default class BisectionMethod extends RootEquation {
             listError: Array<number> = [] ;
 
         //First time
-        error = (this.function(xl, equation) * this.function(xr, equation)) ? this.error(xm, xl) : this.error(xm, xr);
+        error = ( (this.function(xl, equation) * this.function(xr, equation)) < 0 ) ? this.error(xm, xl) : this.error(xm, xr);
         //Get Data
-        listXl.push(JSON.parse(xl.toFixed(6)));
-        listXr.push(JSON.parse(xr.toFixed(6)));
-        listXm.push(JSON.parse(xm.toFixed(6)));
-        listError.push(JSON.parse(error.toFixed(6)));
+        this.listResult(listXl,xl);
+        this.listResult(listXr,xr);
+        this.listResult(listXm,xm);
+        this.listResult(listError,error);
 
         //Begin iteration
-        while (error > epsilon && listError.length < 100) {
+        while (error > epsilon && error != Infinity && listError.length < 100) {
             xm = this.calculateXm(xl, xr);
-            if ((this.function(xl, equation) * this.function(xr, equation)) < 0) {
+            if ( (this.function(xl, equation) * this.function(xr, equation)) < 0 ) {
                 error = this.error(xm, xl);
                 xl = xm;
             }
@@ -57,10 +68,10 @@ export default class BisectionMethod extends RootEquation {
                 xr = xm;
             }
             //Get Data
-            listXl.push(JSON.parse(xl.toFixed(6)));
-            listXr.push(JSON.parse(xr.toFixed(6)));
-            listXm.push(JSON.parse(xm.toFixed(6)));
-            listError.push(JSON.parse(error.toFixed(6)));
+            this.listResult(listXl,xl);
+            this.listResult(listXr,xr);
+            this.listResult(listXm,xm);
+            this.listResult(listError,error);
         }
         // Result
         return (
@@ -91,6 +102,8 @@ export default class BisectionMethod extends RootEquation {
     }
     handleSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        //call function for calculate this method
         let Result:any = this.calculate(
             this.state.Method.RootEquation.Bisection.Xl,
             this.state.Method.RootEquation.Bisection.Xr,
@@ -98,24 +111,24 @@ export default class BisectionMethod extends RootEquation {
             this.state.Epsilon,
             this.state.Equation
         );
-        let row:Array<DataTable> = []
+
+        //push row on data table
+        let row:Array<DataTable> = [];
         for(let i:number = 0 ; i<Result.listError.length ; ++i){
             row.push({
-                Bisection:{
-                    Xl:Result.listXl[i],
-                    Xr:Result.listXr[i],
-                    Xm:Result.listXm[i],
-                    Fxl:JSON.parse(this.function(Result.listXl[i],this.state.Equation).toFixed(6)),
-                    Fxr:JSON.parse(this.function(Result.listXr[i],this.state.Equation).toFixed(6)),
-                    Fxm:JSON.parse(this.function(Result.listXm[i],this.state.Equation).toFixed(6)),
-                    Error:Result.listError[i]
-                }
+                X1:Result.listXl[i],
+                X2:Result.listXr[i],
+                X3:Result.listXm[i],
+                Fx1:JSON.parse(this.function(Result.listXl[i],this.state.Equation).toFixed(6)),
+                Fx2:JSON.parse(this.function(Result.listXr[i],this.state.Equation).toFixed(6)),
+                Fx3:JSON.parse(this.function(Result.listXm[i],this.state.Equation).toFixed(6)),
+                Error:Result.listError[i]
             });
-            this.setState({
-                Data:row
-            })
         }
+
+        //set state to chart and table
         this.setState({
+            Data:row,
             ApexChart: {
                 Series: [
                     {name: "Xl", data: Result.listXl},
@@ -167,17 +180,17 @@ export default class BisectionMethod extends RootEquation {
                             <TableBody>
                                 {this.state.Data.map((row,index) => (
                                     <TableRow
-                                        key={row.Bisection?.Error}
+                                        key={index}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">{index}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Xl}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Xr}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Xm}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Fxl}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Fxr}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Fxm}</TableCell>
-                                        <TableCell align="left">{row.Bisection?.Error}</TableCell>
+                                        <TableCell align="left">{row.X1}</TableCell>
+                                        <TableCell align="left">{row.X2}</TableCell>
+                                        <TableCell align="left">{row.X3}</TableCell>
+                                        <TableCell align="left">{row.Fx1}</TableCell>
+                                        <TableCell align="left">{row.Fx2}</TableCell>
+                                        <TableCell align="left">{row.Fx3}</TableCell>
+                                        <TableCell align="left">{row.Error}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

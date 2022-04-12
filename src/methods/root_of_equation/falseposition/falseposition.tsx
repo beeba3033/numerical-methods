@@ -40,42 +40,42 @@ export default class FalsePositionMethod extends RootEquation{
         ) ;
     }
     calculate(xl:number,xr:number,error:number,epsilon:number,equation:string) : object {
-        let xm: number = this.calculateX1( xl, xr, equation),
+        let x1: number = this.calculateX1( xl, xr, equation),
             listXl: Array<number> = [] ,
             listXr: Array<number> = [] ,
-            listXm: Array<number> = [] ,
+            listX1: Array<number> = [] ,
             listError: Array<number> = [] ;
         //first time
-        error = (this.function(xl, equation) * this.function(xr, equation)) ? this.error(xm, xl) : this.error(xm, xr);
+        error = ( this.function(xl, equation) * this.function(xr, equation) < 0 ) ? this.error(x1, xl) : this.error(x1, xr);
         //Get Data
-        listXl.push(JSON.parse(xl.toFixed(6)));
-        listXr.push(JSON.parse(xr.toFixed(6)));
-        listXm.push(JSON.parse(xm.toFixed(6)));
-        listError.push(JSON.parse(error.toFixed(6)));
+        this.listResult(listXl,xl);
+        this.listResult(listXr,xr);
+        this.listResult(listX1,x1);
+        this.listResult(listError,error);
 
         //begin iteration
-        while (error > epsilon && listError.length < 100) {
-            xm = (this.calculateX1(xl, xr,equation));
+        while (error > epsilon && error != Infinity &&listError.length < 100) {
+            x1 = (this.calculateX1(xl, xr,equation));
             if ((this.function(xl, equation) * this.function(xr, equation)) < 0) {
-                error =this.error(xm, xl);
-                xl = xm;
+                error =this.error(x1, xl);
+                xl = x1;
             }
             else {
-                error = this.error(xm, xr);
-                xr = xm;
+                error = this.error(x1, xr);
+                xr = x1;
             }
             //Get Data
-            listXl.push(JSON.parse(xl.toFixed(6)));
-            listXr.push(JSON.parse(xr.toFixed(6)));
-            listXm.push(JSON.parse(xm.toFixed(6)));
-            listError.push(JSON.parse(error.toFixed(6)));
+            this.listResult(listXl,xl);
+            this.listResult(listXr,xr);
+            this.listResult(listX1,x1);
+            this.listResult(listError,error);
         }
         // Result
         return (
             {
                 listXl:listXl,
                 listXr:listXr,
-                listX1:listXm,
+                listX1:listX1,
                 listError:listError,
                 Epsilon:epsilon,
                 Equation:equation
@@ -98,6 +98,8 @@ export default class FalsePositionMethod extends RootEquation{
     }
     handleSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        //call function for calculate this method
         let Result:any = this.calculate(
             this.state.Method.RootEquation.FalsePosition.Xl,
             this.state.Method.RootEquation.FalsePosition.Xr,
@@ -105,24 +107,24 @@ export default class FalsePositionMethod extends RootEquation{
             this.state.Epsilon,
             this.state.Equation
         );
-        let row:Array<DataTable> = [] ;
+
+        //push row on data table
+        let row:Array<DataTable> = [];
         for(let i:number = 0 ; i<Result.listError.length ; ++i){
             row.push({
-                FalsePosition:{
-                    Xl:Result.listXl[i],
-                    Xr:Result.listXr[i],
-                    X1:Result.listX1[i],
-                    Fxl:JSON.parse(this.function(Result.listXl[i],this.state.Equation).toFixed(6)),
-                    Fxr:JSON.parse(this.function(Result.listXr[i],this.state.Equation).toFixed(6)),
-                    Fx1:JSON.parse(this.function(Result.listX1[i],this.state.Equation).toFixed(6)),
-                    Error:Result.listError[i]
-                }
+                X1:Result.listXl[i],
+                X2:Result.listXr[i],
+                X3:Result.listX1[i],
+                Fx1:JSON.parse(this.function(Result.listXl[i],this.state.Equation).toFixed(6)),
+                Fx2:JSON.parse(this.function(Result.listXr[i],this.state.Equation).toFixed(6)),
+                Fx3:JSON.parse(this.function(Result.listX1[i],this.state.Equation).toFixed(6)),
+                Error:Result.listError[i]
             });
-            this.setState({
-                Data:row
-            })
         }
+
+        //set state to chart and table
         this.setState({
+            Data:row,
             ApexChart: {
                 Series: [
                     {name: "Xl", data: Result.listXl},
@@ -174,17 +176,17 @@ export default class FalsePositionMethod extends RootEquation{
                             <TableBody>
                                 {this.state.Data.map((row,index) => (
                                     <TableRow
-                                        // key={row.FalsePosition?.Error}
+                                        key={index}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">{index}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Xl}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Xr}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.X1}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fxl}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fxr}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fx1}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Error}</TableCell>
+                                        <TableCell align="left">{row.X1}</TableCell>
+                                        <TableCell align="left">{row.X2}</TableCell>
+                                        <TableCell align="left">{row.X3}</TableCell>
+                                        <TableCell align="left">{row.Fx1}</TableCell>
+                                        <TableCell align="left">{row.Fx2}</TableCell>
+                                        <TableCell align="left">{row.Fx3}</TableCell>
+                                        <TableCell align="left">{row.Error}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
