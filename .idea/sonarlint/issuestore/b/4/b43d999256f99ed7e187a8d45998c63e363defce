@@ -1,0 +1,22 @@
+
+Gtypescript:S1128"+Remove this unused import of 'ChangeEvent'.(Å›€–
+Etypescript:S1128")Remove this unused import of 'FormEvent'.(Å›€–
+Mtypescript:S1128"1Remove this unused import of 'FunctionComponent'.(Å›€–
+Jtypescript:S1128")Remove this unused import of 'Bisection'.(Î‰„Èøÿÿÿÿ
+Ntypescript:S1128"-Remove this unused import of 'FalsePosition'.(Î‰„Èøÿÿÿÿ
+Itypescript:S1128"(Remove this unused import of 'OnePoint'.(Î‰„Èøÿÿÿÿ
+Gtypescript:S1128"+Remove this unused import of 'DesmosChart'.(îÀ—õ
+Etypescript:S1128")Remove this unused import of 'ApexChart'.(“øöé
+Btypescript:S1128"&Remove this unused import of 'Method'.(ñùÔ
+Ptypescript:S1128"/Remove this unused import of 'BisectionMethod'.(©™ÉÆûÿÿÿÿ
+Etypescript:S1128"$Remove this unused import of 'Link'.(±öäüÿÿÿÿ
+Ctypescript:S1128"'Remove this unused import of 'Divider'.(¬‰şÌ
+@typescript:S1128"$Remove this unused import of 'List'.(’òŞ²
+Otypescript:S1128".Remove this unused import of 'ListItemButton'.(®„ğÿÿÿÿÿ
+Mtypescript:S1128",Remove this unused import of 'ListItemIcon'.(öĞ˜Òşÿÿÿÿ
+Htypescript:S1128",Remove this unused import of 'ListItemText'.(¼µ©†
+Ftypescript:S1128"%Remove this unused import of 'Paper'.(ğÙşïıÿÿÿÿ
+Itypescript:S1128"-Remove this unused import of 'ThemeProvider'.(£ŠòÓ
+Ftypescript:S1128"*Remove this unused import of 'ListRouter'.(íÈÇ½
+Dtypescript:S1128"#Remove this unused import of 'App'.(Æ®£şÿÿÿÿ
+7typescript:S1116T"Unnecessary semicolon.(ôŸìúÿÿÿÿ

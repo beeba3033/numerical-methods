@@ -1,81 +1,74 @@
 import RootEquation from "../rootofequation";
+import React, {ChangeEvent, FormEvent} from "react";
+import {DesmosChart} from "../../../components/desmoschart/desmoschart";
+import {ApexChart} from "../../../components/apexchart/apexchart";
+import {PropsMethod, PropsReportTable} from "../../methodsproperty";
 import {
+    Autocomplete,
     Button,
     Container,
     Paper,
-    Table, TableBody,
-    TableCell,
+    Table, TableBody, TableCell,
     TableContainer,
     TableHead,
     TableRow,
     TextField
 } from "@mui/material";
-import React, {ChangeEvent, FormEvent} from "react";
-import {DataTable, PropsCustom} from "../../../service/serviceproperty";
-import {DesmosChart} from "../../../components/desmoschart/desmoschart";
-import {ApexChart} from "../../../components/apexchart/apexchart";
 
 export default class FalsePositionMethod extends RootEquation{
-    constructor(props:PropsCustom) {
-        super(props);
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    constructor(Property:PropsMethod) {
+        super(Property);
         this.state = {
-            Epsilon: props.Epsilon,
-            Equation: props.Equation,
-            Error: props.Error,
-            Method: props.Method,
-            ApexChart: {Series: [], Categories: []},
-            Data:[{}]
+            ApexChart: { Series:[] , Categories:[] } ,
+            StateNumerical:Property.StateNumerical ,
+            ReportTable:[]
         };
         this.xlChange = this.xlChange.bind(this);
         this.xrChange = this.xrChange.bind(this);
         this.equationChange = this.equationChange.bind(this);
         this.epsilonChange = this.epsilonChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this. handleSubmit = this.handleSubmit.bind(this);
     }
-    calculateX1(xl:number,xr:number,equation:string) : number{
-        return (
-            ( (xl*this.function(xr,equation)) - (xr*this.function(xl,equation)) )
-            /
-            (this.function(xr,equation)-this.function(xl,equation))
-        ) ;
+    calculateX1(xl:number,xr:number,equation:string):number {
+        return ( ((xl*this.function(xr,equation) - (xr*this.function(xl,equation))) / (this.function(xr,equation) - this.function(xl,equation)) ));
     }
     calculate(xl:number,xr:number,error:number,epsilon:number,equation:string) : object {
-        let xm: number = this.calculateX1( xl, xr, equation),
+        let x1: number = this.calculateX1( xl, xr, equation),
             listXl: Array<number> = [] ,
             listXr: Array<number> = [] ,
-            listXm: Array<number> = [] ,
+            listX1: Array<number> = [] ,
             listError: Array<number> = [] ;
         //first time
-        error = (this.function(xl, equation) * this.function(xr, equation)) ? this.error(xm, xl) : this.error(xm, xr);
-        //Get Data
-        listXl.push(JSON.parse(xl.toFixed(6)));
-        listXr.push(JSON.parse(xr.toFixed(6)));
-        listXm.push(JSON.parse(xm.toFixed(6)));
-        listError.push(JSON.parse(error.toFixed(6)));
+        error = ( this.function(x1, equation) * this.function(xr, equation) < 0 ) ? this.error(x1, xl) : this.error(x1, xr);
+
 
         //begin iteration
-        while (error > epsilon && listError.length < 100) {
-            xm = (this.calculateX1(xl, xr,equation));
-            if ((this.function(xl, equation) * this.function(xr, equation)) < 0) {
-                error =this.error(xm, xl);
-                xl = xm;
+        while (error > epsilon && error != Infinity &&listError.length < 100) {
+            x1 = (this.calculateX1(xl, xr,equation));
+            //Get Data
+            this.listResult(listXl,xl);
+            this.listResult(listXr,xr);
+            this.listResult(listX1,x1);
+
+            if ((this.function(x1, equation) * this.function(xr, equation)) < 0) {
+                error =this.error(x1, xl);
+                xl = x1;
             }
             else {
-                error = this.error(xm, xr);
-                xr = xm;
+                error = this.error(x1, xr);
+                xr = x1;
             }
-            //Get Data
-            listXl.push(JSON.parse(xl.toFixed(6)));
-            listXr.push(JSON.parse(xr.toFixed(6)));
-            listXm.push(JSON.parse(xm.toFixed(6)));
-            listError.push(JSON.parse(error.toFixed(6)));
+
+            this.listResult(listError,error);
+
         }
         // Result
         return (
             {
                 listXl:listXl,
                 listXr:listXr,
-                listX1:listXm,
+                listX1:listX1,
                 listError:listError,
                 Epsilon:epsilon,
                 Equation:equation
@@ -83,46 +76,60 @@ export default class FalsePositionMethod extends RootEquation{
         );
     }
     xlChange(event:ChangeEvent<HTMLInputElement>){
-        this.props.Method.RootEquation.FalsePosition.Xl = JSON.parse(event.target.value) ;
-        this.setState({Method: this.props.Method});
+        try {
+            this.props.StateNumerical.Method.RootEquation.FalsePosition.Xl = JSON.parse(event.target.value) ;
+            this.setState({ StateNumerical:this.props.StateNumerical });
+        }
+        catch (error){}
     }
     xrChange(event:ChangeEvent<HTMLInputElement>){
-        this.props.Method.RootEquation.FalsePosition.Xr = JSON.parse(event.target.value) ;
-        this.setState({Method: this.props.Method});
+        try {
+            this.props.StateNumerical.Method.RootEquation.FalsePosition.Xr = JSON.parse(event.target.value) ;
+            this.setState({ StateNumerical:this.props.StateNumerical });
+        }
+        catch (error){}
     }
-    equationChange(event:ChangeEvent<HTMLInputElement>){
-        this.setState({Equation:event.target.value});
+    equationChange(event:any,value:string){
+        try {
+            this.props.StateNumerical.Equation = value;
+            this.setState({ StateNumerical:this.props.StateNumerical });
+            // console.clear();
+        }
+        catch (error){}
     }
     epsilonChange(event:ChangeEvent<HTMLInputElement>){
-        this.setState({Epsilon:JSON.parse(event.target.value)});
+        try{
+            this.props.StateNumerical.Epsilon = JSON.parse(event.target.value);
+            this.setState( {StateNumerical:this.props.StateNumerical} );
+        }
+        catch (error){}
     }
     handleSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        //call function for calculate this method
         let Result:any = this.calculate(
-            this.state.Method.RootEquation.FalsePosition.Xl,
-            this.state.Method.RootEquation.FalsePosition.Xr,
-            this.state.Error,
-            this.state.Epsilon,
-            this.state.Equation
+            this.state.StateNumerical.Method.RootEquation.FalsePosition.Xl,
+            this.state.StateNumerical.Method.RootEquation.FalsePosition.Xr,
+            this.state.StateNumerical.Error,
+            this.state.StateNumerical.Epsilon,
+            this.state.StateNumerical.Equation
         );
-        let row:Array<DataTable> = [] ;
+
+        //push row on data table
+        let row:Array<PropsReportTable> = [];
         for(let i:number = 0 ; i<Result.listError.length ; ++i){
             row.push({
-                FalsePosition:{
-                    Xl:Result.listXl[i],
-                    Xr:Result.listXr[i],
-                    X1:Result.listX1[i],
-                    Fxl:JSON.parse(this.function(Result.listXl[i],this.state.Equation).toFixed(6)),
-                    Fxr:JSON.parse(this.function(Result.listXr[i],this.state.Equation).toFixed(6)),
-                    Fx1:JSON.parse(this.function(Result.listX1[i],this.state.Equation).toFixed(6)),
-                    Error:Result.listError[i]
-                }
+                X1:Result.listXl[i],
+                X2:Result.listXr[i],
+                X3:Result.listX1[i],
+                Error:Result.listError[i]
             });
-            this.setState({
-                Data:row
-            })
         }
+
+        //set state to chart and table
         this.setState({
+            ReportTable:row,
             ApexChart: {
                 Series: [
                     {name: "Xl", data: Result.listXl},
@@ -134,26 +141,47 @@ export default class FalsePositionMethod extends RootEquation{
             }
         });
     }
+    componentDidMount() {
+        fetch(
+            this.Url)
+            .then((res) => res.json())
+            .then((json) => {
+                this.props.StateNumerical.Problem = json.Chapter[1].FalsePosition;
+                this.setState({StateNumerical:this.props.StateNumerical})
+            })
+    }
+    componentWillUnmount() {
+        // alert('The component is going to be unmounted');
+    }
     render() {
-        return(
+        const options:any= this.state.StateNumerical.Problem;
+        return (
             <Container fixed>
                 <div>
                     <h1>False Position</h1>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className={"Input-Field"}>
-                        <TextField id="outlined-required" label="Equation" variant="outlined" type={"text"} onChange={this.equationChange} />
-                        <TextField id="outlined-number" label="Xl" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.xlChange}/>
-                        <TextField id="outlined-number" label="Xr" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.xrChange}/>
-                        <TextField id="outlined-number" label="Epsilon" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.epsilonChange}/>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={options}
+                            getOptionLabel={(option)=>option.Equation}
+                            value={{Equation:this.state.StateNumerical.Equation}}
+                            onInputChange={this.equationChange}
+                            renderInput={(params) => <TextField {...params} label="Equation" />}
+                        />
+                        <TextField id="outlined-number" label="Xl" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.xlChange} defaultValue={this.state.StateNumerical.Method.RootEquation.FalsePosition.Xl}/>
+                        <TextField id="outlined-number" label="Xr" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.xrChange} defaultValue={this.state.StateNumerical.Method.RootEquation.FalsePosition.Xr}/>
+                        <TextField id="outlined-number" label="Epsilon" variant="outlined" type={"number"} inputProps={{step:Math.pow(10,-6)}} onChange={this.epsilonChange} defaultValue={this.state.StateNumerical.Epsilon}/>
                     </div>
                     <div className={"Submit-Field"}>
-                        <Button variant="contained" type={"submit"}>Calculate</Button>
+                        <Button variant="contained" type={"submit"} disabled={this.state.StateNumerical.Equation == ""}>Calculate</Button>
                         {/*<Button variant="contained" disabled>Calculate</Button>*/}
                     </div>
                 </form>
                 <div className={"Chart-Field"}>
-                    <DesmosChart Equation={this.state.Equation}></DesmosChart>
+                    <DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>
                     <ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>
                 </div>
                 <div className={"Table-Field"}>
@@ -164,27 +192,21 @@ export default class FalsePositionMethod extends RootEquation{
                                     <TableCell>Iteration</TableCell>
                                     <TableCell align="center">Xl</TableCell>
                                     <TableCell align="center">Xr</TableCell>
-                                    <TableCell align="center">X1</TableCell>
-                                    <TableCell align="center">F(Xl)</TableCell>
-                                    <TableCell align="center">F(Xr)</TableCell>
-                                    <TableCell align="center">F(X1)</TableCell>
+                                    <TableCell align="center">Xm</TableCell>
                                     <TableCell align="center">Error</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.state.Data.map((row,index) => (
+                                {this.state.ReportTable.map((row,index) => (
                                     <TableRow
-                                        // key={row.FalsePosition?.Error}
+                                        key={index}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">{index}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Xl}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Xr}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.X1}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fxl}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fxr}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Fx1}</TableCell>
-                                        <TableCell align="left">{row.FalsePosition?.Error}</TableCell>
+                                        <TableCell align="center">{row.X1}</TableCell>
+                                        <TableCell align="center">{row.X2}</TableCell>
+                                        <TableCell align="center">{row.X3}</TableCell>
+                                        <TableCell align="center">{row.Error}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

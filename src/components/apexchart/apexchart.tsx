@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import ReactApexChart from "react-apexcharts";
-import {PropsApexChart, PropsChart} from "../../service/serviceproperty";
+import {PropsApexChart} from "../../methods/methodsproperty";
 
 export const ApexChart:FunctionComponent <PropsApexChart> = (props) =>{
     const series:any = props.Series ;

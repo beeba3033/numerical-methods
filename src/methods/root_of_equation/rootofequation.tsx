@@ -1,10 +1,9 @@
 import {ChangeEvent, Component, FormEvent} from "react";
-import {Property, PropsCustom, Result} from "../../service/serviceproperty";
-import {parse} from "mathjs";
-import * as React from "react";
+import {derivative, parse} from "mathjs";
+import {PropsMethod , StateMethod} from "../methodsproperty";
 
-export default class RootEquation extends Component<PropsCustom,Property> {
-    constructor(props:PropsCustom) {
+export default class RootEquation extends Component<PropsMethod,StateMethod> {
+    constructor(props:PropsMethod) {
         super(props);
     }
     function(x:number,equation:string) : number{
@@ -17,7 +16,31 @@ export default class RootEquation extends Component<PropsCustom,Property> {
         }
         return 0 ;
     }
+    Derivative(x:string,equation:string) : string{
+        try {
+            let Equation:string = derivative(equation,x).toString();
+            return Equation;
+        }
+        catch (error){
+            console.log("Equation Error: "+error);
+        }
+        return equation ;
+    }
     error(xNew:number,xOld:number) : number{
-        return JSON.parse(Math.abs( (xNew-xOld)/xNew ).toFixed(6));
+        if( xNew != 0 ){
+            return Math.abs( (xNew-xOld)/xNew );
+        }
+        else{
+            console.log("xNew can not equal 0")
+            return -1;
+        }
+    }
+    listResult(list:Array<number>,data:number):void{
+        if(data!=Infinity && data!=NaN){
+            list.push(JSON.parse(data.toFixed(6)));
+        }
+        else{
+            list.push(0);
+        }
     }
 }

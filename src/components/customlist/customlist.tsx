@@ -4,8 +4,6 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import {Link} from "react-router-dom";
 import {Paper} from "@mui/material";
 
@@ -35,7 +33,6 @@ export default function NestedList() {
               </Link>
               <ListItemButton onClick={handleClick}>
                   <ListItemText primary="Root of Equation" />
-                  {open ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Collapse in={open} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
@@ -50,8 +47,18 @@ export default function NestedList() {
                           </ListItemButton>
                       </Link>
                       <Link to={"/OnePoint"}>
-                          <ListItemButton sx={{ pl: 4 }}  href="/False Position">
+                          <ListItemButton sx={{ pl: 4 }}  href="/OnePoint">
                               <ListItemText primary="One Point" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/NewtonRaphson"}>
+                          <ListItemButton sx={{ pl: 4 }}  href="/NewtonRaphson">
+                              <ListItemText primary="Newton Raphson" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/Secant"}>
+                          <ListItemButton sx={{ pl: 4 }}  href="/Secant">
+                              <ListItemText primary="Secant" />
                           </ListItemButton>
                       </Link>
                   </List>
