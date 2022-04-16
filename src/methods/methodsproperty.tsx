@@ -24,6 +24,9 @@ export interface Methods {
         NewtonRaphson:NewtonRaphsonn;
         Secant:Secant;
     };
+    // LinearAlgebra:{
+    //
+    // }
 };
 
 // Root of Equation Method
@@ -47,6 +50,28 @@ export interface Secant {
     Xi:number;
 }
 
+// Linear of Algebra Method
+export interface CramerRule {
+
+}
+export interface GaussElimination {
+
+}
+export interface GaussJordan {
+
+}
+export interface LUDecomposition {
+
+}
+export interface JacobiIteration {
+
+}
+export interface GaussSeidel {
+
+}
+export interface ConjugateGradient {
+
+}
 //Chart Property
 export interface PropsApexChart {
     Series:Array<Series>;

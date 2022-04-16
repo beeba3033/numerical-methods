@@ -8,6 +8,10 @@ import FalsePositionMethod from "./methods/root_of_equation/falseposition/falsep
 import OnePointMethod from "./methods/root_of_equation/onepoint/onepoint";
 import NewtonRaphsonMethod from "./methods/root_of_equation/newtonraphsonn/newtonraphson";
 import SecantMethod from "./methods/root_of_equation/secant/secant";
+import CramerRuleMethod from "./methods/linear_of_algebra/cramerrule/cramerrule";
+import JacobiIterationMethod from "./methods/linear_of_algebra/jacobiIteration/jacobiIteration";
+import GaussSeidelIterationMethod from "./methods/linear_of_algebra/gaussseideliteration/gaussseideliteration";
+import ConjugateGradientMethod from "./methods/linear_of_algebra/conjugategradient/conjugategradient";
 
 
 const   url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/db" ;
@@ -47,10 +51,11 @@ function App() {
                         <Route path={"/FalsePosition"} element={<FalsePositionMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/OnePoint"} element={<OnePointMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/NewtonRaphson"} element={<NewtonRaphsonMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"Secant"} element={<SecantMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        {/*<Route path={"/FalsePosition"} element={<FalsePositionMethod Epsilon={epsilon} Equation={equation} Error={error} Method={methods} Url={url}/>}></Route>*/}
-                        {/*<Route path={"/OnePoint"} element={<OnePointMethod Epsilon={epsilon} Equation={equation} Error={error} Method={methods} Url={url}/>}></Route>*/}
-
+                        <Route path={"/Secant"} element={<SecantMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/CramerRule"} element={<CramerRuleMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical}/>}></Route>
                     </Routes>
                 </Router>
             </div>

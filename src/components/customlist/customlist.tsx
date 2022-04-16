@@ -6,14 +6,19 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import {Link} from "react-router-dom";
 import {Paper} from "@mui/material";
+import JacobiIterationMethod from "../../methods/linear_of_algebra/jacobiIteration/jacobiIteration";
+import ConjugateGradientMethod from "../../methods/linear_of_algebra/conjugategradient/conjugategradient";
 
 export default function NestedList() {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(true),
+            [openLinear,setOpenLinear] = React.useState(true);
 
     const handleClick = () => {
         setOpen(!open);
     };
-
+    const LinearClick = () => {
+        setOpenLinear(!openLinear);
+    };
     return (
       <Paper elevation={2} sx={{width:"14rem"}}>
           <List
@@ -59,6 +64,33 @@ export default function NestedList() {
                       <Link to={"/Secant"}>
                           <ListItemButton sx={{ pl: 4 }}  href="/Secant">
                               <ListItemText primary="Secant" />
+                          </ListItemButton>
+                      </Link>
+                  </List>
+              </Collapse>
+              <ListItemButton onClick={LinearClick}>
+                  <ListItemText primary="Linear Algebra" />
+              </ListItemButton>
+              <Collapse in={openLinear} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                      <Link to={"/CramerRule"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Cramer's Rule" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/JacobiIteration"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Jacobi Iteration" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/GaussSeidelIteration"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Gauss-Seidel Iteration" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/ConjugateGradient"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Conjugate Gradient" />
                           </ListItemButton>
                       </Link>
                   </List>
