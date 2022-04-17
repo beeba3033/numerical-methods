@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {PropsMethod, StateMethod} from "../methodsproperty";
-import {column, det, index, matrix, range, subset} from "mathjs";
+import {column, det, index, matrix, multiply, range, subset} from "mathjs";
 
 
 export default class LinearAlgebra extends Component<PropsMethod,StateMethod> {
@@ -33,6 +33,22 @@ export default class LinearAlgebra extends Component<PropsMethod,StateMethod> {
             }
         }
         return MatrixAnswer;
+    }
+    subtractArrayArray(array1:Array<number>,array2:Array<number>,index:number) : Array<number>{
+        let result:Array<number> = [] ;
+        if(Math.abs(array1[index] - array2[index]) != 0 ){
+            array2 = multiply(array2,-1);
+        }
+        for(let i=0 ;i<array1.length ; i++){
+            result.push(array1[i] - array2[i]);
+        }
+        return result ;
+    }
+    multiplyArrayValue(matrix:Array<number>,value:number) : Array<number> {
+        for(let i=0 ; i<matrix.length ; i++){
+            matrix[i] *= value ;
+        }
+        return matrix;
     }
     error(xNew:number,xOld:number) : number{
         if( xNew != 0 ){

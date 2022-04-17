@@ -12,6 +12,7 @@ import CramerRuleMethod from "./methods/linear_of_algebra/cramerrule/cramerrule"
 import JacobiIterationMethod from "./methods/linear_of_algebra/jacobiIteration/jacobiIteration";
 import GaussSeidelIterationMethod from "./methods/linear_of_algebra/gaussseideliteration/gaussseideliteration";
 import ConjugateGradientMethod from "./methods/linear_of_algebra/conjugategradient/conjugategradient";
+import GaussEliminationMethod from "./methods/linear_of_algebra/gausselimination/gausselimination";
 
 
 const   url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/db" ;
@@ -53,6 +54,7 @@ function App() {
                         <Route path={"/NewtonRaphson"} element={<NewtonRaphsonMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/Secant"} element={<SecantMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/CramerRule"} element={<CramerRuleMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/GaussElimination"} element={<GaussEliminationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical}/>}></Route>

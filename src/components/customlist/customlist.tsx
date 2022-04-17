@@ -78,6 +78,11 @@ export default function NestedList() {
                               <ListItemText primary="Cramer's Rule" />
                           </ListItemButton>
                       </Link>
+                      <Link to={"/GaussElimination"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Gauss Elimination" />
+                          </ListItemButton>
+                      </Link>
                       <Link to={"/JacobiIteration"}>
                           <ListItemButton sx={{ pl: 4 }}>
                               <ListItemText primary="Jacobi Iteration" />
