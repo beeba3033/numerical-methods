@@ -13,6 +13,7 @@ import JacobiIterationMethod from "./methods/linear_of_algebra/jacobiIteration/j
 import GaussSeidelIterationMethod from "./methods/linear_of_algebra/gaussseideliteration/gaussseideliteration";
 import ConjugateGradientMethod from "./methods/linear_of_algebra/conjugategradient/conjugategradient";
 import GaussEliminationMethod from "./methods/linear_of_algebra/gausselimination/gausselimination";
+import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjordan";
 
 
 const   url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/db" ;
@@ -20,7 +21,7 @@ function App() {
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {
             Epsilon:Math.pow(10,-6),
-            Equation:"1/2-x",
+            Equation:"",
             Error:0,
             Method:{
                 RootEquation:{
@@ -55,6 +56,7 @@ function App() {
                         <Route path={"/Secant"} element={<SecantMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/CramerRule"} element={<CramerRuleMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/GaussElimination"} element={<GaussEliminationMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/GaussJordan"} element={<GaussJordanMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical}/>}></Route>

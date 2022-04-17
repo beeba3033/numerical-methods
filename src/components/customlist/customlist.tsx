@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 import {Paper} from "@mui/material";
 import JacobiIterationMethod from "../../methods/linear_of_algebra/jacobiIteration/jacobiIteration";
 import ConjugateGradientMethod from "../../methods/linear_of_algebra/conjugategradient/conjugategradient";
+import GaussJordanMethod from "../../methods/linear_of_algebra/gaussjordan/gaussjordan";
 
 export default function NestedList() {
     const [open, setOpen] = React.useState(true),
@@ -81,6 +82,11 @@ export default function NestedList() {
                       <Link to={"/GaussElimination"}>
                           <ListItemButton sx={{ pl: 4 }}>
                               <ListItemText primary="Gauss Elimination" />
+                          </ListItemButton>
+                      </Link>
+                      <Link to={"/GaussJordan"}>
+                          <ListItemButton sx={{ pl: 4 }}>
+                              <ListItemText primary="Gauss Jordan" />
                           </ListItemButton>
                       </Link>
                       <Link to={"/JacobiIteration"}>

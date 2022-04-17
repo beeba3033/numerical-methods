@@ -1,12 +1,21 @@
 import LinearAlgebra from "../linearalgebra";
 import {PropsMethod} from "../../methodsproperty";
+import {Button} from "@mui/material";
 
 export default class JacobiIterationMethod extends LinearAlgebra {
-    private matrixTemp: Array<Array<number>> = [
-        [5, 2, 0, 0],
-        [2, 5, 2, 0],
-        [0, 2, 5, 2],
-        [0, 0, 2, 5]
+    // private matrixTemp: Array<Array<number>> = [
+    //     [5, 2, 0, 0],
+    //     [2, 5, 2, 0],
+    //     [0, 2, 5, 2],
+    //     [0, 0, 2, 5]
+    // ];
+    private test:Array<Array<number>> = [
+        [1,2],
+        [2,1]
+    ];
+    private hello:Array<Array<number>> = [
+        [2],
+        [1]
     ];
     private matrixAnswer: Array<Array<number>> = [
         [12],
@@ -14,7 +23,7 @@ export default class JacobiIterationMethod extends LinearAlgebra {
         [14],
         [7]
     ];
-    private matrixX: Array<Array<number>> = [[0], [0], [0], [0]];
+    private matrixX: Array<Array<number>> = [[0], [0], [0]];
 
     constructor(props: PropsMethod) {
         super(props);
@@ -60,8 +69,8 @@ export default class JacobiIterationMethod extends LinearAlgebra {
     componentDidMount() {
         console.log(
             this.calculate(
-                this.matrixTemp,
-                this.matrixAnswer,
+                this.test,
+                this.hello,
                 this.matrixX,
                 Math.pow(10,-6)
             )
@@ -72,6 +81,7 @@ export default class JacobiIterationMethod extends LinearAlgebra {
 
         return (
             <div>
+                <Button variant="text">Text</Button>
 
             </div>
         );
