@@ -1,4 +1,4 @@
-name: cicd-numerical
+name: CI-numerical
 
 on:
   push:
