@@ -1,0 +1,26 @@
+name: cicd-numerical
+on:
+  push:
+    branch: master
+  pull:
+    branch: master
+jobs:
+  build:
+    runs-on: ubuntu-lates
+    strategy:
+      matrix:
+        node-version: [16.x]
+    step:
+      - uses: action/checkout@v3
+        name: checkout
+      - uses: action/setup-node@v3
+        name: setup
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+        name: ci
+      - run: npm run build
+        name: run-build
+      - run: npm test
+        name: test

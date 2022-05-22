@@ -21,8 +21,20 @@ function App() {
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {
             Epsilon:Math.pow(10,-6),
-            Equation:"",
+            Equation:"x",
             Error:0,
+            Matrix:{
+                Component:[],
+                Size:{
+                    Row:0,
+                    Column:0,
+                    Default:0
+                },
+                Data:{
+                    MatrixA:[],
+                    MatrixB:[]
+                }
+            },
             Method:{
                 RootEquation:{
                     Bisection:{ Xl:1.5 , Xr:2.00 },
@@ -30,6 +42,9 @@ function App() {
                     OnePoint:{ X:0 , Xi:0.5 },
                     NewtonRaphson: {X:2.0},
                     Secant: {X:2,Xi:2.75}
+                },
+                LinearAlgebra:{
+                    CramerRule:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]}
                 }
             },
             Problem:Problems

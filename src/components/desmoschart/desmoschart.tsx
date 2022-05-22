@@ -37,18 +37,26 @@ export const DesmosChart:FC<PropsChart> = (props) => {
                 expressionsTopbar:false,
                 notes:false,
                 qwertyKeyboard:false,
-                expressions:false
+                expressions:false,
+                label:true,
+                showLabel:true,
+                pointsOfInterest:true,
             }
         );
         calculator.setExpression({ id: 'graph1', latex:"0"});
+
+
     },[]);
     try {
         equation = props.Equation?.replace(/\(/g,'{').replace(/\)/g,'}');
-        calculator.setExpression({id: 'Equation', latex: 'y='+ equation});
+        calculator.setExpression({id: 'Equation', latex: 'y='+ equation,  style: Desmos.Styles.OPEN})
     }
     catch (error){
         console.log(error);
     }
+    // a.observe('numericValue', function () {
+    //     console.log(a);
+    // });
     // for(let counter=0;counter<list.length;counter++){
     //     setTimeout(function() {
     //         counter++;

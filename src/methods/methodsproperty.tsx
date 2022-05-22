@@ -7,12 +7,13 @@ export interface PropsMethod {
 export interface StateMethod {
     ApexChart:PropsApexChart;
     StateNumerical:StateNumerical;
-    ReportTable:Array<PropsReportTable>
+    ReportTable:Array<PropsReportTable>;
 }
 export interface StateNumerical {
     Epsilon:number;
     Equation:string;
     Error:number;
+    Matrix:Matrix;
     Method:Methods;
     Problem:Array<PropsProblem>;
 }
@@ -24,9 +25,9 @@ export interface Methods {
         NewtonRaphson:NewtonRaphsonn;
         Secant:Secant;
     };
-    // LinearAlgebra:{
-    //
-    // }
+    LinearAlgebra:{
+        CramerRule:CramerRule;
+    }
 };
 
 // Root of Equation Method
@@ -52,7 +53,8 @@ export interface Secant {
 
 // Linear of Algebra Method
 export interface CramerRule {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 export interface GaussElimination {
 
@@ -60,6 +62,7 @@ export interface GaussElimination {
 export interface GaussJordan {
 
 }
+
 export interface LUDecomposition {
 
 }
@@ -90,6 +93,9 @@ export interface PropsReportTable {
     Fx1?:number;
     Fx2?:number;
     Fx3?:number;
+    Matrix1?:Array<Array<number>>;
+    Matrix2?:Array<Array<number>>;
+    Matrix3?:Array<Array<number>>;
     Error?:number;
 }
 
@@ -108,4 +114,17 @@ export interface PropsChart {
     Name?:string;
     Equation?:string;
     Result?:Result;
+}
+
+export interface Matrix {
+    Component:any;
+    Size:{
+        Row:number;
+        Column:number;
+        Default:number
+    }
+    Data:{
+        MatrixA:Array<Array<number>>;
+        MatrixB:Array<Array<number>>;
+    };
 }

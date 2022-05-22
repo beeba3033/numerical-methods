@@ -1,0 +1,4 @@
+.Problem-Matrix {
+    display: flex;
+    flex-flow: row nowrap;
+}

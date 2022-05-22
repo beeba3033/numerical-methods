@@ -44,7 +44,7 @@ export default class FalsePositionMethod extends RootEquation{
 
 
         //begin iteration
-        while (error > epsilon && error != Infinity &&listError.length < 100) {
+        while (error > epsilon && error != Infinity &&listError.length < 200) {
             x1 = (this.calculateX1(xl, xr,equation));
             //Get Data
             this.listResult(listXl,xl);
