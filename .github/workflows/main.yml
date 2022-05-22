@@ -3,7 +3,7 @@ name: CI-numerical
 on:
   push:
     branch: [ master ]
-  pull:
+  pull_request:
     branch: [ master ]
 
 jobs:
