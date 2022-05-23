@@ -155,7 +155,7 @@ export default class BisectionMethod extends RootEquation {
             })
     }
     componentWillUnmount() {
-        // alert('The component is going to be unmounted');
+
     }
 
     render() {

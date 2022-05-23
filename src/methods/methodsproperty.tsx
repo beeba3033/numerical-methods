@@ -103,6 +103,7 @@ export interface PropsReportTable {
 export interface PropsProblem {
     Bisection:Array<{Equation:string}>
     FalsePosition:Array<object>
+    CramerRule:Array<{MatrixA:Array<Array<number>>,MatrixB:Array<Array<number>>}>
 }
 export interface Result {
     Epsilon:number;
@@ -117,7 +118,13 @@ export interface PropsChart {
 }
 
 export interface Matrix {
-    Component:any;
+    Component: {
+        Selected: {
+            MatrixA:string;
+            MatrixB:string;
+        },
+        Choose:string
+    }
     Size:{
         Row:number;
         Column:number;

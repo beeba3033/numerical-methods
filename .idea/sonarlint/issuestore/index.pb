@@ -24,8 +24,14 @@ l
 Z
 *src/components/desmoschart/desmoschart.tsx,b\3\b33619371145ff2cd6ef419dc2db329b7778fbd4
 _
-/src/methods/linear_of_algebra/linearalgebra.tsx,4\a\4ad4bdeee0b706b4794e6a7d9f7cf9f4013ec61f
-_
 /src/methods/root_of_equation/rootofequation.tsx,f\e\fe4fa781a6c05c9bd4f4d023e597ffd6cdad4a4b
 V
 &src/components/apexchart/apexchart.tsx,8\0\805bcbba13c04aadd5db4515c68e788b90efb7ea
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
+_
+/src/methods/linear_of_algebra/linearalgebra.tsx,4\a\4ad4bdeee0b706b4794e6a7d9f7cf9f4013ec61f
+P
+ src/components/matrix/matrix.tsx,d\a\da3c9effc7b903c521fdd3cb31c46306906e588d
+J
+.github/workflows/main.yml,c\7\c778226b6c4c0fb51cf7942c8ee1f3d9fc1249d0

@@ -1,21 +1,22 @@
 import LinearAlgebra from "../linearalgebra";
 import Tex2SVG from "react-hook-mathjax";
-import {PropsMethod, PropsReportTable} from "../../methodsproperty";
+import {PropsMethod, PropsProblem, PropsReportTable} from "../../methodsproperty";
 import {MatrixComponent} from "../../../components/matrix/matrix";
 import {MathJax, MathJaxContext} from "better-react-mathjax";
 import {
+    Autocomplete,
     Box,
     Breadcrumbs,
     Button,
-    Container,
-    Grid,
+    Container, FormControl,
+    Grid, InputLabel,
     MenuItem,
     Paper,
-    Select,
+    Select, SelectChangeEvent,
     Stack, Table, TableBody,
     TableCell, TableContainer, TableHead,
     TableRow,
-    TextField
+    TextField, ToggleButton, ToggleButtonGroup
 } from "@mui/material";
 import React, {ChangeEvent, Component, FormEvent, FunctionComponent} from "react";
 import {ApexChart} from "../../../components/apexchart/apexchart";
@@ -27,6 +28,7 @@ import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 export default class CramerRuleMethod extends LinearAlgebra {
     // private matrixTemp:Array<Array<number>> =   [[-2,3,1], [3,4,-5], [1,-2,1]];
     // private matrixAnswer:Array<Array<number>> = [[9], [0], [-4]];
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
     constructor(props:PropsMethod) {
         super(props);
         this.state = {
@@ -34,20 +36,27 @@ export default class CramerRuleMethod extends LinearAlgebra {
             StateNumerical: props.StateNumerical,
             ReportTable: [],
         }
+        this.props.StateNumerical.Matrix.Data.MatrixA = this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixA;
+        this.props.StateNumerical.Matrix.Data.MatrixB = this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixB;
+
+        this.setState({StateNumerical:this.props.StateNumerical});
         this.rowChange = this.rowChange.bind(this);
         this.columnChange = this.columnChange.bind(this);
-        this.handleMatrixInput = this.handleMatrixInput.bind(this);
         this.componentMatrixFill = this.componentMatrixFill.bind(this);
-        this.componentMatrixInput = this.componentMatrixInput.bind(this);
+        //MatrixA
+        this.handleMatrixAInput = this.handleMatrixAInput.bind(this);
+        this.componentMatrixAInput = this.componentMatrixAInput.bind(this);
+        //MatrixB
+        this.handleMatrixBInput = this.handleMatrixBInput.bind(this);
+        this.componentMatrixBInput = this.componentMatrixBInput.bind(this);
         this. handleSubmit = this.handleSubmit.bind(this);
     }
-    calculate(matrixA:Array<Array<number>>,matrixB:Array<Array<number>>) : object{
-         let matrixTempA:Array<Array<number>>,
+    solve(matrixA:Array<Array<number>>,matrixB:Array<Array<number>>) : object{
+        let matrixTempA:Array<Array<number>>,
              detA = this.determinant(matrixA),
              listDetMatrixA:Array<number> = [] ,
              listDetMatrixTempA:Array<number> = [] ,
              listResult:Array<number> = [];
-
         for( let i=0 ;  i<matrixA[0].length ; i++ ) {
             matrixTempA = this.columnReplace(matrixA,matrixB,i)
             listDetMatrixTempA.push(JSON.parse(this.determinant(matrixTempA).toFixed(6)));
@@ -64,6 +73,7 @@ export default class CramerRuleMethod extends LinearAlgebra {
     }
     rowChange(event:ChangeEvent<HTMLInputElement>){
         try{
+            this.componentMatrixFill();
             if( (JSON.parse(event.target.value) >= 0) && (JSON.parse(event.target.value) <= 20) ) {
                this.props.StateNumerical.Matrix.Size.Row = parseInt(event.target.value);
                this.setState( {StateNumerical:this.props.StateNumerical} );
@@ -73,6 +83,7 @@ export default class CramerRuleMethod extends LinearAlgebra {
     }
     columnChange(event:ChangeEvent<HTMLInputElement>){
         try{
+            this.componentMatrixFill();
             if( (JSON.parse(event.target.value) >= 0) && (JSON.parse(event.target.value) <= 20) ) {
                     this.props.StateNumerical.Matrix.Size.Column = JSON.parse(event.target.value);
                     this.setState( {StateNumerical:this.props.StateNumerical} );
@@ -82,9 +93,22 @@ export default class CramerRuleMethod extends LinearAlgebra {
     }
     handleSubmit(event:FormEvent<HTMLFormElement>){
         event.preventDefault();
+        if( (
+                (this.props.StateNumerical.Matrix.Size.Column == 0 || this.props.StateNumerical.Matrix.Size.Row == 0 ) &&
+                this.props.StateNumerical.Matrix.Component.Choose == "custom"
+            ) ||
+            this.props.StateNumerical.Matrix.Data.MatrixA.length != this.props.StateNumerical.Matrix.Data.MatrixA[0].length ||
+            this.props.StateNumerical.Matrix.Data.MatrixB.length != this.props.StateNumerical.Matrix.Data.MatrixB[0].length
+        ){
+            alert("Matrix must be square!");
+            return ;
+        }
+
         this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixA = this.props.StateNumerical.Matrix.Data.MatrixA;
+        this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixB = this.props.StateNumerical.Matrix.Data.MatrixB;
+
         //call function for calculate this method
-        let Result:any = this.calculate(
+        let Result:any = this.solve(
             this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixA,
             this.props.StateNumerical.Method.LinearAlgebra.CramerRule.MatrixB,
         );
@@ -102,37 +126,39 @@ export default class CramerRuleMethod extends LinearAlgebra {
         this.setState({
             ReportTable:row,
             StateNumerical: this.props.StateNumerical,
-            ApexChart: {
-                Series: [
-                    {name: "MatrixA", data: Result.listDetMatrixA},
-                    {name: "Det(MatrixA) * MatrixB", data: Result.listDetMatrixAColB},
-                    {name: "Result", data: Result.listResult},
-                ],
-                Categories: Result.listResult.count
-            }
         });
     }
-    handleMatrixInput(event:any){
+    handleMatrixAInput(event:any){
         try{
             this.props.StateNumerical.Matrix.Data.MatrixA[event.target.id.split(',')[0]][event.target.id.split(',')[1]] = parseInt(event.target.value) ;
             this.setState({StateNumerical:this.props.StateNumerical});
         }
         catch (error:any){}
     }
-    componentMatrixFill(Before:number,After:number) {
-        if (Before!=After) {
-            this.props.StateNumerical.Matrix.Size.Default = this.state.StateNumerical.Matrix.Size.Row;
-            this.props.StateNumerical.Matrix.Data.MatrixA = [] ;
-            this.setState({StateNumerical: this.props.StateNumerical});
-            for (let i: number = 0; i < this.state.StateNumerical.Matrix.Size.Row; i++) {
-                this.props.StateNumerical.Matrix.Data.MatrixA[i] = new Array(this.state.StateNumerical.Matrix.Size.Column).fill(0);
-            }
+    handleMatrixBInput(event:any){
+        try{
+            this.props.StateNumerical.Matrix.Data.MatrixB[event.target.id.split(',')[0]][event.target.id.split(',')[1]] = parseInt(event.target.value) ;
+            this.setState({StateNumerical:this.props.StateNumerical});
+        }
+        catch (error:any){
+            console.log(error);
         }
     }
-    componentMatrixInput(row:number,column:number) :Array<any>{
+    componentMatrixFill() {
+        this.props.StateNumerical.Matrix.Data.MatrixA = [] ;
+        this.props.StateNumerical.Matrix.Data.MatrixB = [] ;
+        this.setState({StateNumerical: this.props.StateNumerical});
+        for (let i: number = 0; i < this.state.StateNumerical.Matrix.Size.Row; i++) {
+            this.props.StateNumerical.Matrix.Data.MatrixA[i] = new Array(this.state.StateNumerical.Matrix.Size.Column).fill(0);
+            this.props.StateNumerical.Matrix.Data.MatrixB[i] = new Array(this.state.StateNumerical.Matrix.Size.Column).fill(0);
+        }
+        this.setState({StateNumerical: this.props.StateNumerical});
+    }
+    componentMatrixAInput(row:number,column:number) :Array<any>{
         let Field:Array<any> = [],
             i:number,
             j:number;
+        try {
             for( i=0 ; i<row ; i++){
                 for( j=0 ; j<column ; j++){
                     Field.push(
@@ -143,30 +169,155 @@ export default class CramerRuleMethod extends LinearAlgebra {
                                 variant="outlined"
                                 type={"number"}
                                 // key={Row.toString()+Column.toString()}
-                                onChange={this.handleMatrixInput} defaultValue={this.state.StateNumerical.Matrix.Data.MatrixA[i][j]}>
+                                onChange={this.handleMatrixAInput} defaultValue={this.state.StateNumerical.Matrix.Data.MatrixA[i][j]}>
                             </TextField>
                         </Grid>
                     );
                 }
                 Field.push(<Box width="100%" key={i.toString()}/>)
             }
+        }
+        catch (error){
+            this.componentMatrixFill();
+            for( i=0 ; i<row ; i++){
+                for( j=0 ; j<column ; j++){
+                    Field.push(
+                        <Grid item xs={2} key={i.toString()+j.toString()}>
+                            <TextField
+                                id={i+","+j}
+                                label={""}
+                                variant="outlined"
+                                type={"number"}
+                                // key={Row.toString()+Column.toString()}
+                                onChange={this.handleMatrixAInput} defaultValue={this.state.StateNumerical.Matrix.Data.MatrixA[i][j]}>
+                            </TextField>
+                        </Grid>
+                    );
+                }
+                Field.push(<Box width="100%" key={i.toString()}/>)
+            }
+        }
+        return Field;
+    }
+    componentMatrixBInput(row:number,column:number) :Array<any>{
+        let Field:Array<any> = [],
+            i:number,
+            j:number;
+        try {
+            for( i=0 ; i<row ; i++){
+                for( j=0 ; j<column ; j++){
+                    Field.push(
+                        <Grid item xs={2} key={i.toString()+j.toString()}>
+                            <TextField
+                                id={i+","+j}
+                                label={""}
+                                variant="outlined"
+                                type={"number"}
+                                // key={Row.toString()+Column.toString()}
+                                onChange={this.handleMatrixBInput} defaultValue={this.state.StateNumerical.Matrix.Data.MatrixB[i][j]}>
+                            </TextField>
+                        </Grid>
+                    );
+                }
+                Field.push(<Box width="100%" key={i.toString()}/>)
+            }
+        }
+        catch (error){
+            this.componentMatrixFill();
+            for( i=0 ; i<row ; i++){
+                for( j=0 ; j<column ; j++){
+                    Field.push(
+                        <Grid item xs={2} key={i.toString()+j.toString()}>
+                            <TextField
+                                id={i+","+j}
+                                label={""}
+                                variant="outlined"
+                                type={"number"}
+                                // key={Row.toString()+Column.toString()}
+                                onChange={this.handleMatrixBInput} defaultValue={this.state.StateNumerical.Matrix.Data.MatrixB[i][j]}>
+                            </TextField>
+                        </Grid>
+                    );
+                }
+                Field.push(<Box width="100%" key={i.toString()}/>)
+            }
+        }
         return Field;
     }
     componentMatrixAnswer() : Array<Array<string>> {
         let Field:Array<Array<string>> = [];
         let character:string = 'x';
         for(let i:number=0; i<this.state.StateNumerical.Matrix.Data.MatrixA.length ; i++){
-            character = `x`+(i+1);
+            character = 'x'+(i+1);
             Field.push([character]);
         }
         return Field;
     }
-    componentDidMount() {
-        // console.log( this.matrixTemp)
+    async componentDidMount() {
+        await this.componentMatrixFill();
+        await this.props.StateNumerical.Problem.splice(0, this.props.StateNumerical.Problem.length);
+        this.setState({StateNumerical:this.props.StateNumerical});
+        await fetch(
+            this.Url)
+            .then(async (res) => await res.json())
+            .then(async (json) => {
+                this.props.StateNumerical.Problem = json.Chapter[5].CramerRule;
+                this.setState({StateNumerical:this.props.StateNumerical});
+            })
     }
+    selectedOptionMatrixA = (event:SelectChangeEvent) => {
+        let options:Array<any> = this.state.StateNumerical.Problem;
 
+        if(options != [] && (JSON.stringify(options).includes("MatrixA"))){
+            this.props.StateNumerical.Matrix.Data.MatrixA = JSON.parse(options[JSON.parse(event.target.value)].MatrixA);
+            this.props.StateNumerical.Matrix.Component.Selected.MatrixA = event.target.value;
+            this.setState({StateNumerical: this.props.StateNumerical});
+        }
+    }
+    selectedOptionMatrixB = (event:SelectChangeEvent) => {
+        let options:Array<any> = this.state.StateNumerical.Problem;
+
+        if(options != [] && (JSON.stringify(options).includes("MatrixB"))){
+            this.props.StateNumerical.Matrix.Data.MatrixB = JSON.parse(options[JSON.parse(event.target.value)].MatrixB);
+            this.props.StateNumerical.Matrix.Component.Selected.MatrixB = event.target.value;
+            this.setState({StateNumerical: this.props.StateNumerical});
+        }
+    }
+    selectOptionMatrixA() {
+        let options:Array<any> = this.state.StateNumerical.Problem;
+        let Field:any = [];
+
+        if(options != [] && (JSON.stringify(options).includes("MatrixA"))){
+            options.map(({MatrixA,MatrixB},index)=>{
+                Field.push(
+                    <MenuItem value={index} key={"A"+index}>
+                        <MatrixComponent matrix={JSON.parse(MatrixA)}></MatrixComponent>
+                    </MenuItem>
+                );
+            });
+        }
+        return Field;
+    }
+    selectOptionMatrixB() {
+        let options:Array<any> = this.state.StateNumerical.Problem;
+        let Field:any = [];
+
+        if(options != [] && (JSON.stringify(options).includes("MatrixB"))){
+            options.map(({MatrixA,MatrixB},index)=>{
+                Field.push(
+                    <MenuItem value={index} key={"B"+index}>
+                        <MatrixComponent matrix={JSON.parse(MatrixB)}></MatrixComponent>
+                    </MenuItem>
+                );
+            });
+        }
+        return Field;
+    }
+    chooseComponent = (event:any) =>{
+        this.props.StateNumerical.Matrix.Component.Choose = event.target.value;
+        this.setState({StateNumerical:this.props.StateNumerical});
+    }
     render() {
-        this.componentMatrixFill(this.state.StateNumerical.Matrix.Size.Default,this.state.StateNumerical.Matrix.Size.Row)
         return (
             <Container fixed>
                 <div>
@@ -175,37 +326,98 @@ export default class CramerRuleMethod extends LinearAlgebra {
                 <MathJaxContext>
                     <Stack spacing={2}>
                         <Breadcrumbs separator={"="} aria-label="breadcrumb">
-                            <MatrixComponent matrix={this.state.StateNumerical.Matrix.Data.MatrixA}></MatrixComponent>
+                            <MatrixComponent matrix={this.props.StateNumerical.Matrix.Data.MatrixA}></MatrixComponent>
                             <MatrixComponent matrix={this.componentMatrixAnswer()}></MatrixComponent>
-                            <MatrixComponent matrix={this.state.StateNumerical.Matrix.Data.MatrixB}></MatrixComponent>
+                            <MatrixComponent matrix={this.props.StateNumerical.Matrix.Data.MatrixB}></MatrixComponent>
                         </Breadcrumbs>
                     </Stack>
+                    <br/>
+                    <br/>
+                    <ToggleButtonGroup
+                        color="primary"
+                        value={this.props.StateNumerical.Matrix.Component.Choose}
+                        exclusive
+                        onChange={this.chooseComponent}
+                    >
+                        <ToggleButton value="problems">Problems</ToggleButton>
+                        <ToggleButton value="custom">Custom</ToggleButton>
+                    </ToggleButtonGroup>
+                    <br/>
+                    <br/>
+
+                    {   this.props.StateNumerical.Matrix.Component.Choose == "problems" &&
+                        <div className={"problems-content"}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">MatrixA</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="MatrixA"
+                                    value={this.props.StateNumerical.Matrix.Component.Selected.MatrixA}
+                                    onChange={this.selectedOptionMatrixA}
+                                >
+                                    { this.selectOptionMatrixA() }
+                                </Select>
+                            </FormControl>
+                            <br/>
+                            <br/>
+
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">MatrixB</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="MatrixB"
+                                    value={this.props.StateNumerical.Matrix.Component.Selected.MatrixB}
+                                    onChange={this.selectedOptionMatrixB}
+                                >
+                                    {
+                                        this.selectOptionMatrixB()
+                                    }
+                                </Select>
+                            </FormControl>
+                        </div>
+                    }
+                    <br/>
+                    <br/>
                 </MathJaxContext>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <TextField
-                            id="standard-basic"
-                            label="Row"
-                            variant="standard"
-                            type={"number"}
-                            onChange={this.rowChange}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <TextField id="standard-basic" label="Column" variant="standard" type={"number"} inputProps={{step:0}} onChange={this.columnChange} defaultValue={this.state.StateNumerical.Matrix.Size.Column}/>
-                    </Grid>
-                </Grid>
+                {
+                    this.props.StateNumerical.Matrix.Component.Choose == "custom" &&
+                    <div className={"custom-content"}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="standard-basic"
+                                    label="Row"
+                                    variant="standard"
+                                    type={"number"}
+                                    onChange={this.rowChange}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField id="standard-basic" label="Column" variant="standard" type={"number"} inputProps={{step:0}} onChange={this.columnChange} defaultValue={this.state.StateNumerical.Matrix.Size.Column}/>
+                            </Grid>
+                        </Grid>
+                        <div className={"custom-show"}>
+                            <h3>matrixA</h3>
+                            <Grid container spacing={2}>
+                                {this.componentMatrixAInput(this.state.StateNumerical.Matrix.Size.Row,this.state.StateNumerical.Matrix.Size.Column)}
+                            </Grid>
+                            <br/>
+                            <h3>matrixB</h3>
+                            <Grid container spacing={2}>
+                                {this.componentMatrixBInput(this.state.StateNumerical.Matrix.Size.Row,this.state.StateNumerical.Matrix.Size.Column)}
+                            </Grid>
+                        </div>
+                    </div>
+                }
+
                 <br/>
                 <form onSubmit={this.handleSubmit}>
-                <Grid container spacing={2}>
-                        {this.componentMatrixInput(this.state.StateNumerical.Matrix.Size.Row,this.state.StateNumerical.Matrix.Size.Column)}
-                </Grid>
+
+
                     <Button variant="contained" type={"submit"} disabled={this.state.StateNumerical.Equation == ""}>Calculate</Button>
                 </form>
-                <br/>
-                <div className={"Chart-Field"}>
-                    <ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>
-                </div>
                 <div className={"Table-Field"}>
                     <MathJaxContext>
                         <TableContainer component={Paper}>

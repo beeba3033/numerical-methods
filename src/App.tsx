@@ -24,15 +24,21 @@ function App() {
             Equation:"x",
             Error:0,
             Matrix:{
-                Component:[],
+                Component:{
+                    Selected:{
+                        MatrixA:"0",
+                        MatrixB:"0",
+                    },
+                    Choose:"problems"
+                },
                 Size:{
                     Row:0,
                     Column:0,
                     Default:0
                 },
                 Data:{
-                    MatrixA:[],
-                    MatrixB:[]
+                    MatrixA:[[1,2],[3,4]],
+                    MatrixB:[[5,6],[7,8]]
                 }
             },
             Method:{
