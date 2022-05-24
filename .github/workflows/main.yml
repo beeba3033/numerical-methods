@@ -1,34 +1,27 @@
 name: CI-numerical
 
-on:
-  push:
-    branch: [ master ]
-  pull_request:
-    branch: [ master ]
-
+on: [push]
 jobs:
   install-and-test:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [17.x]
 
     steps:
-      - uses: action/checkout@v3
-        name: checkout
+      - uses: actions/checkout@master
 
-      - uses: action/setup-node@v3
-        name: setup
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
 
-      - run: yarn ci
-        name: ci
+      - name: Install packages
+        run: yarn install --frozen-lockfile
 
-      - run: yarn run build
-        name: run-build
+      - name: Test
+        run: yarn test
 
-      - run: yarn test
-        name: test
+        env:
+          CI: true
