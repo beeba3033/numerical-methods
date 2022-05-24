@@ -16,7 +16,7 @@ import {MatrixComponent} from "../../../components/matrix/matrix";
 import {MathJaxContext} from "better-react-mathjax";
 
 export default class GaussSeidelMethod extends LinearAlgebra {
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
 
     constructor(props: PropsMethod) {
         super(props);

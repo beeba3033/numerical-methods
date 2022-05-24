@@ -16,7 +16,7 @@ import GaussEliminationMethod from "./methods/linear_of_algebra/gausselimination
 import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjordan";
 
 
-const   url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/db" ;
+const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
 function App() {
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {

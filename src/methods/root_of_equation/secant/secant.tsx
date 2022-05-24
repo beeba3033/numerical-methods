@@ -16,7 +16,7 @@ import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 import {ApexChart} from "../../../components/apexchart/apexchart";
 
 export default class SecantMethod extends RootEquation {
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(Property:PropsMethod) {
         super(Property);
         this.state = {

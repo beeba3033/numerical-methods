@@ -28,7 +28,7 @@ import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 export default class CramerRuleMethod extends LinearAlgebra {
     // private matrixTemp:Array<Array<number>> =   [[-2,3,1], [3,4,-5], [1,-2,1]];
     // private matrixAnswer:Array<Array<number>> = [[9], [0], [-4]];
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(props:PropsMethod) {
         super(props);
         this.state = {

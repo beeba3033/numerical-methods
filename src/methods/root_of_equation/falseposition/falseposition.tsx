@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 
 export default class FalsePositionMethod extends RootEquation{
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(Property:PropsMethod) {
         super(Property);
         this.state = {

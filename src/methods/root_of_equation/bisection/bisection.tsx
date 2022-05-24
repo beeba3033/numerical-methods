@@ -20,7 +20,7 @@ import {PropsMethod, PropsProblem, PropsReportTable} from "../../methodsproperty
 import {number} from "mathjs";
 
 export default class BisectionMethod extends RootEquation {
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/-numerical-methods-server/NumericalMethod" ;
+    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(Property:PropsMethod) {
         super(Property);
         this.state = {
