@@ -19,16 +19,11 @@ import {
     TextField, ToggleButton, ToggleButtonGroup
 } from "@mui/material";
 import React, {ChangeEvent, Component, FormEvent, FunctionComponent} from "react";
-import {ApexChart} from "../../../components/apexchart/apexchart";
-import {number, row} from "mathjs";
-import {parse} from "url";
-import {DesmosChart} from "../../../components/desmoschart/desmoschart";
+import axios from "axios";
 
 
 export default class CramerRuleMethod extends LinearAlgebra {
-    // private matrixTemp:Array<Array<number>> =   [[-2,3,1], [3,4,-5], [1,-2,1]];
-    // private matrixAnswer:Array<Array<number>> = [[9], [0], [-4]];
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
+
     constructor(props:PropsMethod) {
         super(props);
         this.state = {
@@ -257,13 +252,20 @@ export default class CramerRuleMethod extends LinearAlgebra {
         await this.componentMatrixFill();
         await this.props.StateNumerical.Problem.splice(0, this.props.StateNumerical.Problem.length);
         this.setState({StateNumerical:this.props.StateNumerical});
-        await fetch(
-            this.Url)
-            .then(async (res) => await res.json())
-            .then(async (json) => {
-                this.props.StateNumerical.Problem = json.Chapter[5].CramerRule;
-                this.setState({StateNumerical:this.props.StateNumerical});
-            })
+        const api = this.props.StateNumerical.Url;
+        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+            .then(res => {
+                console.log(res.data);
+                this.props.StateNumerical.Problem = res.data.Chapter[5].CramerRule;
+                this.setState({StateNumerical:this.props.StateNumerical})
+            });
+        // await fetch(
+        //     this.Url)
+        //     .then(async (res) => await res.json())
+        //     .then(async (json) => {
+        //         this.props.StateNumerical.Problem = json.Chapter[5].CramerRule;
+        //         this.setState({StateNumerical:this.props.StateNumerical});
+        //     })
     }
     selectedOptionMatrixA = (event:SelectChangeEvent) => {
         let options:Array<any> = this.state.StateNumerical.Problem;

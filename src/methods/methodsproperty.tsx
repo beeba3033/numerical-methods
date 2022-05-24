@@ -18,6 +18,8 @@ export interface StateNumerical {
     Matrix:Matrix;
     Method:Methods;
     Problem:Array<PropsProblem>;
+    Token:string;
+    Url:string;
 }
 export interface Methods {
     RootEquation:{

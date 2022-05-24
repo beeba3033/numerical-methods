@@ -14,9 +14,9 @@ import {
 } from "@mui/material";
 import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 import {ApexChart} from "../../../components/apexchart/apexchart";
+import axios from "axios";
 
 export default class SecantMethod extends RootEquation {
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(Property:PropsMethod) {
         super(Property);
         this.state = {
@@ -127,13 +127,20 @@ export default class SecantMethod extends RootEquation {
         });
     }
     componentDidMount() {
-        fetch(
-            this.Url)
-            .then((res) => res.json())
-            .then((json) => {
-                this.props.StateNumerical.Problem = json.Chapter[4].Secant;
+        const api = this.props.StateNumerical.Url;
+        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+            .then(res => {
+                console.log(res.data);
+                this.props.StateNumerical.Problem = res.data.Chapter[4].Secant;
                 this.setState({StateNumerical:this.props.StateNumerical})
-            })
+            });
+        // fetch(
+        //     this.Url)
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         this.props.StateNumerical.Problem = json.Chapter[4].Secant;
+        //         this.setState({StateNumerical:this.props.StateNumerical})
+        //     })
     }
     componentWillUnmount() {
         // alert('The component is going to be unmounted');

@@ -14,9 +14,9 @@ import {
     TableRow,
     TextField
 } from "@mui/material";
+import axios from "axios";
 
 export default class FalsePositionMethod extends RootEquation{
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
     constructor(Property:PropsMethod) {
         super(Property);
         this.state = {
@@ -142,13 +142,20 @@ export default class FalsePositionMethod extends RootEquation{
         });
     }
     componentDidMount() {
-        fetch(
-            this.Url)
-            .then((res) => res.json())
-            .then((json) => {
-                this.props.StateNumerical.Problem = json.Chapter[1].FalsePosition;
+        const api = this.props.StateNumerical.Url;
+        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+            .then(res => {
+                console.log(res.data);
+                this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
                 this.setState({StateNumerical:this.props.StateNumerical})
-            })
+            });
+        // fetch(
+        //     this.Url)
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         this.props.StateNumerical.Problem = json.Chapter[1].FalsePosition;
+        //         this.setState({StateNumerical:this.props.StateNumerical})
+        //     })
     }
     componentWillUnmount() {
         // alert('The component is going to be unmounted');

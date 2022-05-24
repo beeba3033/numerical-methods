@@ -17,6 +17,7 @@ import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjord
 
 
 const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
+
 function App() {
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {
@@ -58,7 +59,9 @@ function App() {
                     ConjugateGradient:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]}
                 }
             },
-            Problem:Problems
+            Problem:Problems,
+            Url:"http://localhost:7800/NumericalMethod",
+            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFmdGVybGV2aXNwQGhvdG1haWwuY29tIiwiaWF0IjoxNjUzNDEwNjEwLCJleHAiOjE2NTM0MTQyMTAsInN1YiI6IjEifQ.Ky5ahbQwkvHcBfGwwL8kaZqoxe6wGmLS2SDXQhPNCgY"
         } ;
     useEffect(()=>{
         fetch(

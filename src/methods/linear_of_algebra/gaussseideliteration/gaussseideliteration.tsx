@@ -14,9 +14,9 @@ import {
 } from "@mui/material";
 import {MatrixComponent} from "../../../components/matrix/matrix";
 import {MathJaxContext} from "better-react-mathjax";
+import axios from "axios";
 
 export default class GaussSeidelMethod extends LinearAlgebra {
-    private Url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/NumericalMethod" ;
 
     constructor(props: PropsMethod) {
         super(props);
@@ -266,14 +266,21 @@ export default class GaussSeidelMethod extends LinearAlgebra {
         await this.componentMatrixFill();
         await this.props.StateNumerical.Problem.splice(0, this.props.StateNumerical.Problem.length);
         this.setState({StateNumerical:this.props.StateNumerical});
-        await fetch(
-            this.Url)
-            .then(async (res) => await res.json())
-            .then(async (json) => {
-                console.log(json);
-                this.props.StateNumerical.Problem = json.Chapter[9].GaussSeidel;
-                this.setState({StateNumerical:this.props.StateNumerical});
-            })
+        const api = this.props.StateNumerical.Url;
+        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+            .then(res => {
+                console.log(res.data);
+                this.props.StateNumerical.Problem = res.data.Chapter[9].GaussSeidel;
+                this.setState({StateNumerical:this.props.StateNumerical})
+            });
+        // await fetch(
+        //     this.Url)
+        //     .then(async (res) => await res.json())
+        //     .then(async (json) => {
+        //         console.log(json);
+        //         this.props.StateNumerical.Problem = json.Chapter[9].GaussSeidel;
+        //         this.setState({StateNumerical:this.props.StateNumerical});
+        //     })
         // console.log(this.calculate(this.matrixA,this.matrixX,this.matrixB));
     }
     chooseComponent = (event:any) =>{
