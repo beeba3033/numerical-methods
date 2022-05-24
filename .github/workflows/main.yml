@@ -22,13 +22,13 @@ jobs:
         name: setup
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci
+      - run: yarn ci
         name: ci
 
-      - run: npm run build
+      - run: yarn run build
         name: run-build
 
-      - run: npm test
+      - run: yarn test
         name: test
