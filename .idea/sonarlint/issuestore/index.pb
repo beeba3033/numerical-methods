@@ -9,5 +9,3 @@ g
 7src/methods/linear_of_algebra/cramerrule/cramerrule.css,4\2\4275f71891156366872d47d101bf802bd0acc087
 V
 &src/components/apexchart/apexchart.tsx,8\0\805bcbba13c04aadd5db4515c68e788b90efb7ea
-<
-package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a

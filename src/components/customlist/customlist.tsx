@@ -9,6 +9,7 @@ import {Paper} from "@mui/material";
 import JacobiIterationMethod from "../../methods/linear_of_algebra/jacobiIteration/jacobiIteration";
 import ConjugateGradientMethod from "../../methods/linear_of_algebra/conjugategradient/conjugategradient";
 import GaussJordanMethod from "../../methods/linear_of_algebra/gaussjordan/gaussjordan";
+import LUDecompositionMethod from "../../methods/linear_of_algebra/ludecomposition/ludecomposition";
 
 export default function NestedList() {
     const [open, setOpen] = React.useState(true),
