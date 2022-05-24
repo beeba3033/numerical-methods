@@ -1,4 +1,6 @@
 //Props Custom
+import JacobiIterationMethod from "./linear_of_algebra/jacobiIteration/jacobiIteration";
+
 export interface PropsMethod {
     StateNumerical:StateNumerical;
 }
@@ -27,6 +29,11 @@ export interface Methods {
     };
     LinearAlgebra:{
         CramerRule:CramerRule;
+        GaussElimination:GaussElimination;
+        GaussJordan:GaussJordan;
+        Jacobi:JacobiIteration;
+        GaussSeidel:GaussSeidel;
+        ConjugateGradient:ConjugateGradient;
     }
 };
 
@@ -57,23 +64,28 @@ export interface CramerRule {
     MatrixB:Array<Array<number>>;
 }
 export interface GaussElimination {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 export interface GaussJordan {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 
 export interface LUDecomposition {
 
 }
 export interface JacobiIteration {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 export interface GaussSeidel {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 export interface ConjugateGradient {
-
+    MatrixA:Array<Array<number>>;
+    MatrixB:Array<Array<number>>;
 }
 //Chart Property
 export interface PropsApexChart {
@@ -96,6 +108,12 @@ export interface PropsReportTable {
     Matrix1?:Array<Array<number>>;
     Matrix2?:Array<Array<number>>;
     Matrix3?:Array<Array<number>>;
+    listR?:Array<any>,
+    listX?:Array<any>,
+    listD?:Array<any>,
+    listLamda?:Array<any>,
+    listAlpha?:Array<any>,
+    listError?:Array<number>
     Error?:number;
 }
 

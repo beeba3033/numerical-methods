@@ -59,4 +59,19 @@ export default class LinearAlgebra extends Component<PropsMethod,StateMethod> {
             return -1;
         }
     }
+    matrixCustomColumn(matrix:Array<Array<number>>,column:number):Array<Array<number>>{
+        let temp:Array<Array<number>> = [];
+        let i=0,j=0;
+        for(i=0;i<matrix.length;i++){
+            let arr:Array<number> = [];
+            for(j=0;j<column;j++){
+                if(matrix[i][j] == undefined || matrix[i][j] == null){
+                    matrix[i][j] = 0;
+                }
+                arr.push(matrix[i][j]);
+            }
+            temp.push(arr);
+        }
+        return temp;
+    }
 }

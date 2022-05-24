@@ -2,10 +2,10 @@ import {ComponentProps, FC, useEffect, useState} from "react";
 import {PropsChart} from "../../methods/methodsproperty";
 
 /* Dosmos Chart */
-const Desmos = require("desmos");
-let elt = document.getElementById("calculator"),
-    calculator = Desmos.GraphingCalculator(elt),
-    equation;
+// const Desmos = require("desmos");
+// let elt = document.getElementById("calculator"),
+//     calculator = Desmos.GraphingCalculator(elt),
+//     equation;
 /* Pattern Equation */
 const Pattern = new RegExp(/f/g);
 
@@ -24,36 +24,37 @@ const list:Array<List> = [
     {xl:"1.75",xr:"1.751953"},
     {xl:"1.75",xr:"1.750977"}
 ];
+// export const DesmosChart:FC<PropsChart> = (props) => {
 
 export const DesmosChart:FC<PropsChart> = (props) => {
-    const [isShown, setIsShown] = useState(false);
-    useEffect(()=>{
-        elt = document.getElementById('calculator');
-        calculator = Desmos.GraphingCalculator(
-            elt,
-            {
-                keypad:false,
-                settingsMenu:false,
-                expressionsTopbar:false,
-                notes:false,
-                qwertyKeyboard:false,
-                expressions:false,
-                label:true,
-                showLabel:true,
-                pointsOfInterest:true,
-            }
-        );
-        calculator.setExpression({ id: 'graph1', latex:"0"});
-
-
-    },[]);
-    try {
-        equation = props.Equation?.replace(/\(/g,'{').replace(/\)/g,'}');
-        calculator.setExpression({id: 'Equation', latex: 'y='+ equation,  style: Desmos.Styles.OPEN})
-    }
-    catch (error){
-        console.log(error);
-    }
+    // const [isShown, setIsShown] = useState(false);
+    // useEffect(()=>{
+    //     elt = document.getElementById('calculator');
+    //     calculator = Desmos.GraphingCalculator(
+    //         elt,
+    //         {
+    //             keypad:false,
+    //             settingsMenu:false,
+    //             expressionsTopbar:false,
+    //             notes:false,
+    //             qwertyKeyboard:false,
+    //             expressions:false,
+    //             label:true,
+    //             showLabel:true,
+    //             pointsOfInterest:true,
+    //         }
+    //     );
+    //     calculator.setExpression({ id: 'graph1', latex:"0"});
+    //
+    //
+    // },[]);
+    // try {
+    //     equation = props.Equation?.replace(/\(/g,'{').replace(/\)/g,'}');
+    //     calculator.setExpression({id: 'Equation', latex: 'y='+ equation,  style: Desmos.Styles.OPEN})
+    // }
+    // catch (error){
+    //     console.log(error);
+    // }
     // a.observe('numericValue', function () {
     //     console.log(a);
     // });
@@ -68,7 +69,8 @@ export const DesmosChart:FC<PropsChart> = (props) => {
 
 
     return (
-        <div id="calculator" style={{width:"100%",height:"25rem"}}>
-        </div>
+        // <div id="calculator" style={{width:"100%",height:"25rem"}}>
+        // </div>
+        <div></div>
     );
 };

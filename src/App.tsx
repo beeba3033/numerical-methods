@@ -50,7 +50,12 @@ function App() {
                     Secant: {X:2,Xi:2.75}
                 },
                 LinearAlgebra:{
-                    CramerRule:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]}
+                    CramerRule:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]},
+                    GaussElimination:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]},
+                    GaussJordan:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]},
+                    Jacobi:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]},
+                    GaussSeidel:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]},
+                    ConjugateGradient:{MatrixA:[[-2,3,1], [3,4,-5], [1,-2,1]],MatrixB:[[9], [0], [-4]]}
                 }
             },
             Problem:Problems

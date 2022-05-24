@@ -286,7 +286,6 @@ export default class CramerRuleMethod extends LinearAlgebra {
     selectOptionMatrixA() {
         let options:Array<any> = this.state.StateNumerical.Problem;
         let Field:any = [];
-
         if(options != [] && (JSON.stringify(options).includes("MatrixA"))){
             options.map(({MatrixA,MatrixB},index)=>{
                 Field.push(
@@ -326,8 +325,10 @@ export default class CramerRuleMethod extends LinearAlgebra {
                 <MathJaxContext>
                     <Stack spacing={2}>
                         <Breadcrumbs separator={"="} aria-label="breadcrumb">
-                            <MatrixComponent matrix={this.props.StateNumerical.Matrix.Data.MatrixA}></MatrixComponent>
-                            <MatrixComponent matrix={this.componentMatrixAnswer()}></MatrixComponent>
+                            <Breadcrumbs separator={"X"} aria-label="breadcrumb">
+                                <MatrixComponent matrix={this.props.StateNumerical.Matrix.Data.MatrixA}></MatrixComponent>
+                                <MatrixComponent matrix={this.componentMatrixAnswer()}></MatrixComponent>
+                            </Breadcrumbs>
                             <MatrixComponent matrix={this.props.StateNumerical.Matrix.Data.MatrixB}></MatrixComponent>
                         </Breadcrumbs>
                     </Stack>
@@ -346,37 +347,38 @@ export default class CramerRuleMethod extends LinearAlgebra {
                     <br/>
 
                     {   this.props.StateNumerical.Matrix.Component.Choose == "problems" &&
-                        <div className={"problems-content"}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">MatrixA</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    label="MatrixA"
-                                    value={this.props.StateNumerical.Matrix.Component.Selected.MatrixA}
-                                    onChange={this.selectedOptionMatrixA}
-                                >
-                                    { this.selectOptionMatrixA() }
-                                </Select>
-                            </FormControl>
-                            <br/>
-                            <br/>
+                    <div className={"problems-content"}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">MatrixA</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label="MatrixA"
+                                //0 1 2 3 4 5
+                                value={this.props.StateNumerical.Matrix.Component.Selected.MatrixA}
+                                onChange={this.selectedOptionMatrixA}
+                            >
+                                { this.selectOptionMatrixA() }
+                            </Select>
+                        </FormControl>
+                        <br/>
+                        <br/>
 
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">MatrixB</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    label="MatrixB"
-                                    value={this.props.StateNumerical.Matrix.Component.Selected.MatrixB}
-                                    onChange={this.selectedOptionMatrixB}
-                                >
-                                    {
-                                        this.selectOptionMatrixB()
-                                    }
-                                </Select>
-                            </FormControl>
-                        </div>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">MatrixB</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label="MatrixB"
+                                value={this.props.StateNumerical.Matrix.Component.Selected.MatrixB}
+                                onChange={this.selectedOptionMatrixB}
+                            >
+                                {
+                                    this.selectOptionMatrixB()
+                                }
+                            </Select>
+                        </FormControl>
+                    </div>
                     }
                     <br/>
                     <br/>
@@ -446,7 +448,6 @@ export default class CramerRuleMethod extends LinearAlgebra {
                             </Table>
                         </TableContainer>
                     </MathJaxContext>
-
                 </div>
             </Container>
         );
