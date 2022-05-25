@@ -91,12 +91,8 @@ export interface ConjugateGradient {
 }
 //Chart Property
 export interface PropsApexChart {
-    Series:Array<Series>;
-    Categories:Array<number>;
-}
-export interface Series {
-    name:string;
-    data:Array<number>;
+    Series:Array<any>;
+    Categories:Array<object>;
 }
 
 //ReportTable Property

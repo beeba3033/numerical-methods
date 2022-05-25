@@ -15,6 +15,7 @@ import {ApexChart} from "../../../components/apexchart/apexchart";
 import React, {ChangeEvent, FormEvent} from "react";
 import {PropsMethod, PropsReportTable} from "../../methodsproperty";
 import axios from "axios";
+import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 export default class OnePointMethod extends RootEquation {
     constructor(Property:PropsMethod) {
@@ -103,17 +104,24 @@ export default class OnePointMethod extends RootEquation {
                 Error:Result.listError[i]
             });
         }
-
+        let reChart = [];
+        for(let i=0 ;i<Result.listError.length;i++){
+            reChart.push({
+                X:Result.listX[i],
+                Xi:Result.listXi[i],
+                Error:Result.listError[i]
+            })
+        }
         //set state to chart and table
         this.setState({
             ReportTable:row,
             ApexChart: {
-                Series: [
+                Series: reChart,
+                Categories: [
                     {name: "X", data: Result.listX},
                     {name: "Xi", data: Result.listXi},
                     {name: "Error", data: Result.listError}
-                ],
-                Categories: Result.listError.count
+                ]
             }
         });
     }
@@ -166,8 +174,24 @@ export default class OnePointMethod extends RootEquation {
                     </div>
                 </form>
                 <div className={"Chart-Field"}>
-                    <DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>
-                    <ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={this.state.ApexChart.Series}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="X" stroke="#8884d8"/>
+                            <Line type="monotone" dataKey="Xi" stroke="#82ca9d" />
+                            <Line type="monotone" dataKey="Error" stroke="#82ca9d" />
+                        </LineChart>
+                    </ResponsiveContainer>
+                    {/*<DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>*/}
+                    {/*<ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>*/}
                 </div>
                 <div className={"Table-Field"}>
                     <TableContainer component={Paper}>

@@ -17,10 +17,12 @@
     width:12rem;
 }
 .Chart-Field {
-    display: flex;
-    flex-flow: column wrap;
-    gap: 1.2rem;
-    margin: 2rem;
+    width: 100%;
+    height: 400px;
+    /*display: flex;*/
+    /*flex-flow: column wrap;*/
+    /*gap: 1.2rem;*/
+    margin: 2rem 0;
 }
 .Table-Field {
     margin: 2rem 0 4rem;

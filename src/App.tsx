@@ -61,7 +61,7 @@ function App() {
             },
             Problem:Problems,
             Url:"http://localhost:7800/NumericalMethod",
-            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFmdGVybGV2aXNwQGhvdG1haWwuY29tIiwiaWF0IjoxNjUzNDEwNjEwLCJleHAiOjE2NTM0MTQyMTAsInN1YiI6IjEifQ.Ky5ahbQwkvHcBfGwwL8kaZqoxe6wGmLS2SDXQhPNCgY"
+            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTM1MTI1OTAsImV4cCI6MTY1MzUxNjE5MCwic3ViIjoiNSJ9.DHho0OLoIAVAlRq_W2bsoh_9L8GmxNmd9WqiHboGCxU"
         } ;
     useEffect(()=>{
         fetch(

@@ -1,6 +1,5 @@
 import RootEquation from "../rootofequation";
 import React, {ChangeEvent, FormEvent} from "react";
-import {DesmosChart} from "../../../components/desmoschart/desmoschart";
 import {ApexChart} from "../../../components/apexchart/apexchart";
 import {PropsMethod, PropsReportTable} from "../../methodsproperty";
 import {
@@ -15,6 +14,7 @@ import {
     TextField
 } from "@mui/material";
 import axios from "axios";
+import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 export default class FalsePositionMethod extends RootEquation{
     constructor(Property:PropsMethod) {
@@ -126,24 +126,32 @@ export default class FalsePositionMethod extends RootEquation{
                 Error:Result.listError[i]
             });
         }
-
+        let reChart = [];
+        for(let i=0 ;i<Result.listError.length;i++){
+            reChart.push({
+                Xl:Result.listXl[i],
+                Xr:Result.listXr[i],
+                X1:Result.listX1[i],
+                Error:Result.listError[i]
+            })
+        }
         //set state to chart and table
         this.setState({
             ReportTable:row,
             ApexChart: {
-                Series: [
+                Series: reChart,
+                Categories: [
                     {name: "Xl", data: Result.listXl},
                     {name: "Xr", data: Result.listXr},
                     {name: "X1", data: Result.listX1},
                     {name: "Error", data: Result.listError}
-                ],
-                Categories: Result.listError.count
+                ]
             }
         });
     }
-    componentDidMount() {
+    async componentDidMount() {
         const api = this.props.StateNumerical.Url;
-        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
             .then(res => {
                 console.log(res.data);
                 this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
@@ -188,8 +196,24 @@ export default class FalsePositionMethod extends RootEquation{
                     </div>
                 </form>
                 <div className={"Chart-Field"}>
-                    <DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>
-                    <ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                            width={500}
+                            height={300}
+                            data={this.state.ApexChart.Series}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Line type="monotone" dataKey="Xl" stroke="#8884d8"/>
+                            <Line type="monotone" dataKey="Xr" stroke="#82ca9d" />
+                            <Line type="monotone" dataKey="X1" stroke="#8884d8"/>
+                            <Line type="monotone" dataKey="Error" stroke="#82ca9d" />
+                        </LineChart>
+                    </ResponsiveContainer>
+                    {/*<ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>*/}
                 </div>
                 <div className={"Table-Field"}>
                     <TableContainer component={Paper}>
