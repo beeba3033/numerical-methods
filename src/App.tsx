@@ -17,9 +17,14 @@ import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjord
 import LUDecompositionMethod from "./methods/linear_of_algebra/ludecomposition/ludecomposition";
 
 
-const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
+// const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
 
 function App() {
+    let path:string = JSON.stringify(process.env.REACT_APP_PATH),
+        key:string = JSON.stringify(process.env.REACT_APP_KEY),
+        regex = /"/g;
+    let pathRegex:string = path.replace(regex,''),
+        keyRegex:string = key.replace(regex,'');
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {
             Epsilon:Math.pow(10,-6),
@@ -61,16 +66,11 @@ function App() {
                 }
             },
             Problem:Problems,
-            Url:"http://localhost:7800/NumericalMethod",
-            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTM1MzU3NTYsImV4cCI6MTY1MzUzOTM1Niwic3ViIjoiNSJ9.qi44w5XZIo6VEmY7-ZIPe7DYW9zVTLfK6gRX9nBYLwY"
+            Url:pathRegex,
+            Token:keyRegex
         } ;
-    useEffect(()=>{
-        fetch(
-            url)
-            .then((res) => res.json())
-            .then((json) => {
-                setProblem(json.NumericalMethod.Chapter);
-            })
+    useEffect( ()=>{
+
     },[]);
     return (
         <div className="App">

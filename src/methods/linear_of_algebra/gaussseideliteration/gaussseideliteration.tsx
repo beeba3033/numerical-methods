@@ -102,20 +102,46 @@ export default class GaussSeidelMethod extends LinearAlgebra {
     }
     handleSubmit(event:FormEvent<HTMLFormElement>){
         event.preventDefault();
-        if( (
-                (this.props.StateNumerical.Matrix.Size.Column == 0 || this.props.StateNumerical.Matrix.Size.Row == 0 ) &&
-                this.props.StateNumerical.Matrix.Component.Choose == "custom"
-            ) ||
-            this.props.StateNumerical.Matrix.Data.MatrixA.length != this.props.StateNumerical.Matrix.Data.MatrixA[0].length
-        ){
-            alert("Matrix must be square!");
+        if( this.props.StateNumerical.Matrix.Data.MatrixA == undefined ||
+            this.props.StateNumerical.Matrix.Data.MatrixB == undefined )
+        {
+            alert("Can't find some Matrix");
             return ;
         }
+        if( this.props.StateNumerical.Matrix.Size.Column == undefined ||
+            this.props.StateNumerical.Matrix.Size.Row == undefined )
+        {
+            alert("Can't find Size of Matrix");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Component.Choose == undefined){
+            alert("Please select options");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Component.Choose == "custom" ){
+            if( this.props.StateNumerical.Matrix.Size.Column == 0 || this.props.StateNumerical.Matrix.Size.Row == 0 ){
+                alert("Can't find Size of Matrix");
+                return ;
+            }
+        }
+        if(this.props.StateNumerical.Matrix.Data.MatrixB[0] == undefined){
+            alert("Can't find length of MatrixB");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Data.MatrixA[0] == undefined){
+            alert("Can't find length of MatrixA");
+            return ;
+        }
+        // if( this.props.StateNumerical.Matrix.Data.MatrixB.length != this.props.StateNumerical.Matrix.Data.MatrixB[0].length ||
+        //     this.props.StateNumerical.Matrix.Data.MatrixA.length != this.props.StateNumerical.Matrix.Data.MatrixA[0].length)
+        // {
+        //     alert("Matrix must be square!");
+        //     return ;
+        // }
 
         this.props.StateNumerical.Method.LinearAlgebra.GaussSeidel.MatrixA = this.props.StateNumerical.Matrix.Data.MatrixA;
         this.props.StateNumerical.Method.LinearAlgebra.GaussSeidel.MatrixB = this.props.StateNumerical.Matrix.Data.MatrixB;
 
-        console.log("test");
         //call function for calculate this method
         let Result:any = this.solve(
             this.props.StateNumerical.Method.LinearAlgebra.GaussSeidel.MatrixA,

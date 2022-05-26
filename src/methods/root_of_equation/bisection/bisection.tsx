@@ -154,11 +154,17 @@ export default class BisectionMethod extends RootEquation {
     }
     async componentDidMount() {
         const api = this.props.StateNumerical.Url;
+
         await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
             .then(res => {
                 this.props.StateNumerical.Problem = res.data.Chapter[0].Bisection;
                 this.setState({StateNumerical:this.props.StateNumerical})
-            });
+            })
+            // .then(res => {
+            //     console.log(res);
+            //     this.props.StateNumerical.Problem = res.data.Chapter[0].Bisection;
+            //     this.setState({StateNumerical:this.props.StateNumerical})
+            // });
         // fetch(
         //     this.Url)
         //     .then((res) => res.json())

@@ -52,12 +52,12 @@ export default class CramerRuleMethod extends LinearAlgebra {
              listDetMatrixA:Array<number> = [] ,
              listDetMatrixTempA:Array<number> = [] ,
              listResult:Array<number> = [];
-        for( let i=0 ;  i<matrixA[0].length ; i++ ) {
-            matrixTempA = this.columnReplace(matrixA,matrixB,i)
-            listDetMatrixTempA.push(JSON.parse(this.determinant(matrixTempA).toFixed(6)));
-            listDetMatrixA.push(JSON.parse(detA.toFixed(6)));
-            listResult.push(JSON.parse((this.determinant(matrixTempA)/detA).toFixed(6)));
-        }
+        // for( let i=0 ;  i<matrixA[0].length ; i++ ) {
+        //     matrixTempA = this.columnReplace(matrixA,matrixB,i)
+        //     listDetMatrixTempA.push(JSON.parse(this.determinant(matrixTempA).toFixed(6)));
+        //     listDetMatrixA.push(JSON.parse(detA.toFixed(6)));
+        //     listResult.push(JSON.parse((this.determinant(matrixTempA)/detA).toFixed(6)));
+        // }
         return(
             {
                 listDetMatrixAColB:listDetMatrixTempA,
@@ -88,13 +88,39 @@ export default class CramerRuleMethod extends LinearAlgebra {
     }
     handleSubmit(event:FormEvent<HTMLFormElement>){
         event.preventDefault();
-        if( (
-                (this.props.StateNumerical.Matrix.Size.Column == 0 || this.props.StateNumerical.Matrix.Size.Row == 0 ) &&
-                this.props.StateNumerical.Matrix.Component.Choose == "custom"
-            ) ||
-            this.props.StateNumerical.Matrix.Data.MatrixA.length != this.props.StateNumerical.Matrix.Data.MatrixA[0].length ||
-            this.props.StateNumerical.Matrix.Data.MatrixB.length != this.props.StateNumerical.Matrix.Data.MatrixB[0].length
-        ){
+        if( this.props.StateNumerical.Matrix.Data.MatrixA == undefined ||
+            this.props.StateNumerical.Matrix.Data.MatrixB == undefined )
+        {
+            alert("Can't find some Matrix");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Size.Column == undefined ||
+            this.props.StateNumerical.Matrix.Size.Row == undefined )
+        {
+            alert("Can't find Size of Matrix");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Component.Choose == undefined){
+            alert("Please select options");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Component.Choose == "custom" ){
+            if( this.props.StateNumerical.Matrix.Size.Column == 0 || this.props.StateNumerical.Matrix.Size.Row == 0 ){
+                alert("Can't find Size of Matrix");
+                return ;
+            }
+        }
+        if(this.props.StateNumerical.Matrix.Data.MatrixB[0] == undefined){
+            alert("Can't find length of MatrixB");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Data.MatrixA[0] == undefined){
+            alert("Can't find length of MatrixA");
+            return ;
+        }
+        if( this.props.StateNumerical.Matrix.Data.MatrixB.length != this.props.StateNumerical.Matrix.Data.MatrixB[0].length ||
+            this.props.StateNumerical.Matrix.Data.MatrixA.length != this.props.StateNumerical.Matrix.Data.MatrixA[0].length)
+        {
             alert("Matrix must be square!");
             return ;
         }
@@ -117,7 +143,7 @@ export default class CramerRuleMethod extends LinearAlgebra {
                 Matrix3:Result.listResult
             });
         }
-        //set state to chart and table
+        // //set state to chart and table
         this.setState({
             ReportTable:row,
             StateNumerical: this.props.StateNumerical,

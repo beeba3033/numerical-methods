@@ -1,0 +1,9 @@
+
+4typescript:S3317" Rename this file to "NestedList"
+Ftypescript:S1128"*Remove this unused import of 'makeStyles'.(›úëÏ
+Btypescript:S1128"&Remove this unused import of 'styled'.(›úëÏ
+Qtypescript:S1128	"5Remove this unused import of 'JacobiIterationMethod'.(Ù”ï
+Xtypescript:S1128
+"7Remove this unused import of 'ConjugateGradientMethod'.(Ñ¨Ëøÿÿÿÿ
+Mtypescript:S1128"1Remove this unused import of 'GaussJordanMethod'.(á³Üæ
+Qtypescript:S1128"5Remove this unused import of 'LUDecompositionMethod'.(Ñ„ÛÜ
