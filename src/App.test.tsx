@@ -10,10 +10,10 @@ test('renders learn react link', async () => {
   // await waitFor(() => expect(getByRole('textbox')).toHaveValue('hello'))
   // expect(screen.getByTestId('Epsilon')).toHaveValue(0.000001)
   // await waitFor(() =>    fireEvent.click(screen.getByText(component)) );
-},60000);
+});
 test('Component: Bisection',async () => {
   const component = /Bisection/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
   fireEvent.click(screen.getByText(/calculate/i))
@@ -23,7 +23,7 @@ test('Component: Bisection',async () => {
 });
 test('Component: FalsePosition',async () => {
   const component = /FalsePosition/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} =await render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
   fireEvent.click(screen.getByText(/calculate/i))
