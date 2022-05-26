@@ -75,33 +75,33 @@ export default class FalsePositionMethod extends RootEquation{
         );
     }
     xlChange(event:ChangeEvent<HTMLInputElement>){
-        // try {
+        try {
             this.props.StateNumerical.Method.RootEquation.FalsePosition.Xl = JSON.parse(event.target.value) ;
             this.setState({ StateNumerical:this.props.StateNumerical });
-        // }
-        // catch (error){}
+        }
+        catch (error){}
     }
     xrChange(event:ChangeEvent<HTMLInputElement>){
-        // try {
+        try {
             this.props.StateNumerical.Method.RootEquation.FalsePosition.Xr = JSON.parse(event.target.value) ;
             this.setState({ StateNumerical:this.props.StateNumerical });
-        // }
-        // catch (error){}
+        }
+        catch (error){}
     }
     equationChange(event:any,value:string){
-        // try {
+        try {
             this.props.StateNumerical.Equation = value;
             this.setState({ StateNumerical:this.props.StateNumerical });
             // console.clear();
-        // }
-        // catch (error){}
+        }
+        catch (error){}
     }
     epsilonChange(event:ChangeEvent<HTMLInputElement>){
-        // try{
+        try{
             this.props.StateNumerical.Epsilon = JSON.parse(event.target.value);
             this.setState( {StateNumerical:this.props.StateNumerical} );
-        // }
-        // catch (error){}
+        }
+        catch (error){}
     }
     handleSubmit(event:FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -148,9 +148,9 @@ export default class FalsePositionMethod extends RootEquation{
             }
         });
     }
-    componentDidMount() {
+    async componentDidMount() {
         const api = this.props.StateNumerical.Url;
-        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
             .then(res => {
                 console.log(res.data);
                 this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
