@@ -13,7 +13,8 @@ test('renders learn react link', async () => {
 },60000);
 test('Component: Bisection',async () => {
   const component = /Bisection/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)) ,{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000});
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -22,7 +23,8 @@ test('Component: Bisection',async () => {
 },60000);
 test('Component: FalsePosition',async () => {
   const component = /FalsePosition/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -31,7 +33,8 @@ test('Component: FalsePosition',async () => {
 },60000);
 test('Component: OnePoint',async () => {
   const component = /One Point/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -40,7 +43,8 @@ test('Component: OnePoint',async () => {
 },60000);
 test('Component: NewtonRaphson',async () => {
   const component = /Newton Raphson/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -49,7 +53,8 @@ test('Component: NewtonRaphson',async () => {
 },60000);
 test('Component: Secant',async () => {
   const component = /Secant/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -59,7 +64,8 @@ test('Component: Secant',async () => {
 
 test('Component: CramerRule',async () => {
   const component = /Cramer's Rule/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -69,7 +75,8 @@ test('Component: CramerRule',async () => {
 
 test('Component: GaussElimination',async () => {
   const component = /Gauss Elimination/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -79,7 +86,8 @@ test('Component: GaussElimination',async () => {
 
 test('Component: GaussJordan',async () => {
   const component = /Gauss Jordan/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)),{timeout:2000} );
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -89,7 +97,8 @@ test('Component: GaussJordan',async () => {
 
 test('Component: GaussSeidel',async () => {
   const component = /Gauss-Seidel/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)) ,{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)) ,{timeout:2000});
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -99,7 +108,8 @@ test('Component: GaussSeidel',async () => {
 
 test('Component: Jacobi',async () => {
   const component = /Jacobi/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)) ,{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)) ,{timeout:2000});
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
@@ -109,7 +119,8 @@ test('Component: Jacobi',async () => {
 
 test('Component: Conjugate',async () => {
   const component = /Conjugate/i;
-  const {container,getByTestId} = render(<App/>)
+  const {container,getByTestId} = await render(<App/>)
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
   await waitFor(() => fireEvent.click(screen.getByText(component)),{timeout:2000} );
   await waitFor(() => fireEvent.click(screen.getByText(/calculate/i)) ,{timeout:2000});
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();

@@ -81,7 +81,7 @@ function App() {
             "email": emailRegex,
             "password": passwordRegex
         })
-            .then(res => {
+            .then(async res => {
                 State_of_Numerical.Token = res.data.accessToken.replace(regex,'')
             })
     },[]);
