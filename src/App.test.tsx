@@ -19,7 +19,7 @@ test('Component: Bisection',async () => {
   // fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
 });
-test('Component: FalsePosition',async () => {
+it('Component: FalsePosition',async () => {
   const component = /FalsePosition/i;
   const {container,getByTestId} =await render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
