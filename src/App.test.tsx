@@ -3,8 +3,8 @@ import {fireEvent, getByTestId, render, screen, waitFor} from '@testing-library/
 import App from './App';
 import {unmountComponentAtNode} from "react-dom";
 
-test('renders learn react link', async () => {
-  const {container,getByTestId} = await render(<App/>);
+test('renders learn react link', () => {
+  const {container,getByTestId} = render(<App/>);
   // const component = /Bisection/i;
   // const {getByTestId} = render(<App/>)
   // await waitFor(() => expect(getByRole('textbox')).toHaveValue('hello'))
@@ -13,9 +13,9 @@ test('renders learn react link', async () => {
     unmountComponentAtNode(container);
   container.remove();
 });
-test('Component: Bisection',async () => {
+test('Component: Bisection', () => {
   const component = /Bisection/i;
-  const {container,getByTestId} = await render(<App/>)
+  const {container,getByTestId} =  render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
   // fireEvent.click(screen.getByText(/calculate/i))
@@ -23,9 +23,9 @@ test('Component: Bisection',async () => {
     unmountComponentAtNode(container);
   container.remove();
 });
-it('Component: FalsePosition',async () => {
+it('Component: FalsePosition',() => {
   const component = /FalsePosition/i;
-  const {container,getByTestId} =await render(<App/>)
+  const {container,getByTestId} = render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
   // fireEvent.click(screen.getByText(/calculate/i))
