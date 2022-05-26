@@ -151,7 +151,7 @@ export default function NestedList() {
                   </List>
               </Collapse>
               <ListItemButton onClick={InterPolation} sx={{boxShadow:'0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'}}>
-                  <ListItemText primary="Interpoloation Techniques"  sx={{color: '#FFF0F0',fontWeight:'700'}}/>
+                  <ListItemText primary="Interpolation Techniques"  sx={{color: '#FFF0F0',fontWeight:'700'}}/>
                   {openInterPolation && <i className='bx bxs-chevron-up' style={{color:"white"}}></i>}
                   {!openInterPolation && <i className='bx bxs-chevron-down' style={{color:"white"}}></i>}
               </ListItemButton>

@@ -74,7 +74,7 @@ function App() {
             },
             Problem:Problems,
             Url:pathRegex,
-            Token:keyRegex
+            Token:keyRegex,
         } ;
     useEffect( ()=>{
         axios.post(loginRegex, {
