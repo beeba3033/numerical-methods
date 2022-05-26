@@ -120,7 +120,7 @@ test('Component: Jacobi',async () => {
 test('Component: Conjugate',async () => {
   const component = /Conjugate/i;
   const {container,getByTestId} = await render(<App/>)
-  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
+  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:10000});
   fireEvent.click(screen.getByText(component))
   fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
