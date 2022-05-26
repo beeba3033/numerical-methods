@@ -16,7 +16,7 @@ test('Component: Bisection',async () => {
   const {container,getByTestId} = await render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
+  // fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
 });
 test('Component: FalsePosition',async () => {
@@ -24,7 +24,7 @@ test('Component: FalsePosition',async () => {
   const {container,getByTestId} =await render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
   fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
+  // fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
 });
 // test('Component: OnePoint',async () => {
