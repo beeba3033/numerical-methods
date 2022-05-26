@@ -4,14 +4,14 @@ import App from './App';
 import {unmountComponentAtNode} from "react-dom";
 
 test('renders learn react link', () => {
-  const {container,getByTestId} = render(<App/>);
+  // const {container,getByTestId} = render(<App/>);
   // const component = /Bisection/i;
   // const {getByTestId} = render(<App/>)
   // await waitFor(() => expect(getByRole('textbox')).toHaveValue('hello'))
   // expect(screen.getByTestId('Epsilon')).toHaveValue(0.000001)
   // await waitFor(() =>    fireEvent.click(screen.getByText(component)) );
-    unmountComponentAtNode(container);
-  container.remove();
+  //   unmountComponentAtNode(container);
+  // container.remove();
 });
 test('Component: Bisection', () => {
   const component = /Bisection/i;
@@ -25,13 +25,13 @@ test('Component: Bisection', () => {
 });
 it('Component: FalsePosition',() => {
   const component = /FalsePosition/i;
-  const {container,getByTestId} = render(<App/>)
+  // const {container,getByTestId} = render(<App/>)
   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
-  fireEvent.click(screen.getByText(component))
+  // fireEvent.click(screen.getByText(component))
   // fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-    unmountComponentAtNode(container);
-  container.remove();
+  //   unmountComponentAtNode(container);
+  // container.remove();
 });
 // test('Component: OnePoint',async () => {
 //   const component = /One Point/i;
