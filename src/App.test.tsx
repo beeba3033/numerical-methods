@@ -95,35 +95,35 @@ test('Component: GaussJordan',async () => {
   container.remove();
 },60000);
 
-test('Component: GaussSeidel',async () => {
-  const component = /Gauss-Seidel/i;
-  const {container,getByTestId} = await render(<App/>)
-  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
-  fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
-  // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-  unmountComponentAtNode(container);
-  container.remove();
-},60000);
-
-test('Component: Jacobi',async () => {
-  const component = /Jacobi/i;
-  const {container,getByTestId} = await render(<App/>)
-  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
-  fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
-  // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-  unmountComponentAtNode(container);
-  container.remove();
-},60000);
-
-test('Component: Conjugate',async () => {
-  const component = /Conjugate/i;
-  const {container,getByTestId} = await render(<App/>)
-  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:10000});
-  fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
-  // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-  unmountComponentAtNode(container);
-  container.remove();
-},60000);
+// test('Component: GaussSeidel',async () => {
+//   const component = /Gauss-Seidel/i;
+//   const {container,getByTestId} = await render(<App/>)
+//   await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
+//   fireEvent.click(screen.getByText(component))
+//   fireEvent.click(screen.getByText(/calculate/i))
+//   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
+//   unmountComponentAtNode(container);
+//   container.remove();
+// },60000);
+//
+// test('Component: Jacobi',async () => {
+//   const component = /Jacobi/i;
+//   const {container,getByTestId} = await render(<App/>)
+//   await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
+//   fireEvent.click(screen.getByText(component))
+//   fireEvent.click(screen.getByText(/calculate/i))
+//   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
+//   unmountComponentAtNode(container);
+//   container.remove();
+// },60000);
+//
+// test('Component: Conjugate',async () => {
+//   const component = /Conjugate/i;
+//   const {container,getByTestId} = await render(<App/>)
+//   await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:10000});
+//   fireEvent.click(screen.getByText(component))
+//   fireEvent.click(screen.getByText(/calculate/i))
+//   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
+//   unmountComponentAtNode(container);
+//   container.remove();
+// },60000);
