@@ -82,7 +82,7 @@ function App() {
             "password": passwordRegex
         })
             .then(async res => {
-                State_of_Numerical.Token = res.data.accessToken.replace(regex,'')
+                State_of_Numerical.Token = await res.data.accessToken.replace(regex,'')
             })
     },[]);
     return (
