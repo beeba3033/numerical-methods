@@ -9,16 +9,8 @@ g
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 O
 src/methods/methodsproperty.tsx,e\f\efb420cc4d5aacfbe8bf467100a18217a066c65a
-d
-4src/methods/root_of_equation/bisection/bisection.css,7\4\748bde7f8ac26520ebb84f1e6811fde3bc1d112d
 V
 &src/components/apexchart/apexchart.tsx,8\0\805bcbba13c04aadd5db4515c68e788b90efb7ea
-m
-=src/methods/root_of_equation/newtonraphsonn/newtonraphson.tsx,7\5\75594c59d18f24c1b573cc9d13c5eb978e02bc4c
-b
-2src/methods/root_of_equation/onepoint/onepoint.tsx,3\2\325ee17acf42f7debf2d48cf0aa3e17bc6ede039
-^
-.src/methods/root_of_equation/secant/secant.tsx,a\2\a2f124ff5d526e4fcad549c39afe68fc371f1d4a
 ;
 src/App.css,a\a\aa7165aefcf8ee3d73539e99ab007daf1aa18d8d
 q
