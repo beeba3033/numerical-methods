@@ -14,6 +14,7 @@ import GaussSeidelIterationMethod from "./methods/linear_of_algebra/gaussseideli
 import ConjugateGradientMethod from "./methods/linear_of_algebra/conjugategradient/conjugategradient";
 import GaussEliminationMethod from "./methods/linear_of_algebra/gausselimination/gausselimination";
 import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjordan";
+import LUDecompositionMethod from "./methods/linear_of_algebra/ludecomposition/ludecomposition";
 
 
 const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
@@ -61,7 +62,7 @@ function App() {
             },
             Problem:Problems,
             Url:"http://localhost:7800/NumericalMethod",
-            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTM1MTI1OTAsImV4cCI6MTY1MzUxNjE5MCwic3ViIjoiNSJ9.DHho0OLoIAVAlRq_W2bsoh_9L8GmxNmd9WqiHboGCxU"
+            Token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTM1MzU3NTYsImV4cCI6MTY1MzUzOTM1Niwic3ViIjoiNSJ9.qi44w5XZIo6VEmY7-ZIPe7DYW9zVTLfK6gRX9nBYLwY"
         } ;
     useEffect(()=>{
         fetch(
@@ -89,6 +90,8 @@ function App() {
                         <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
                         <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/LUDecomposition"} element={<LUDecompositionMethod StateNumerical={State_of_Numerical}/>}></Route>
+
                     </Routes>
                 </Router>
             </div>

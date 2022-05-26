@@ -51,4 +51,7 @@ export default class LUDecompositionMethod extends LinearAlgebra {
         //
         // return success;
     }
+    render() {
+        return <div>LUDecomposition</div>;
+    }
 }
