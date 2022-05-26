@@ -21,12 +21,12 @@ test('renders learn react link', () => {
 });
 test('Component: Bisection',async () => {
   let component = /Bisection/i;
-  await act(()=>{
-    render(<App/>)
+  await act(async ()=>{
+    render(<App/>) ;
+    await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
+    fireEvent.click(screen.getByText(component))
   })
-  await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
-  fireEvent.click(screen.getByText(component))
-  fireEvent.click(screen.getByText(/calculate/i))
+
 });
 // it('Component: FalsePosition',async () => {
 //   const component = /FalsePosition/i;
