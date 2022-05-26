@@ -21,16 +21,16 @@ test('Component: Bisection',async () => {
   unmountComponentAtNode(container);
   container.remove();
 },60000);
-// test('Component: FalsePosition',async () => {
-//   const component = /FalsePosition/i;
-//   const {container,getByTestId} = await render(<App/>)
-//   // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
-//   fireEvent.click(screen.getByText(component))
-//   fireEvent.click(screen.getByText(/calculate/i))
-//   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-//   unmountComponentAtNode(container);
-//   container.remove();
-// },60000);
+test('Component: FalsePosition',async () => {
+  const component = /FalsePosition/i;
+  const {container,getByTestId} = render(<App/>)
+  // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:8000});
+  fireEvent.click(screen.getByText(component))
+  fireEvent.click(screen.getByText(/calculate/i))
+  // await expect(screen.getByText('0.000001')).toBeInTheDocument();
+  unmountComponentAtNode(container);
+  container.remove();
+},60000);
 // test('Component: OnePoint',async () => {
 //   const component = /One Point/i;
 //   const {container,getByTestId} = await render(<App/>)
