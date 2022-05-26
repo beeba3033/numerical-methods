@@ -18,8 +18,6 @@ test('Component: Bisection',async () => {
   fireEvent.click(screen.getByText(component))
   fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-  unmountComponentAtNode(container);
-  container.remove();
 });
 test('Component: FalsePosition',async () => {
   const component = /FalsePosition/i;
@@ -28,8 +26,6 @@ test('Component: FalsePosition',async () => {
   fireEvent.click(screen.getByText(component))
   fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-  unmountComponentAtNode(container);
-  container.remove();
 });
 // test('Component: OnePoint',async () => {
 //   const component = /One Point/i;
