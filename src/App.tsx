@@ -15,16 +15,23 @@ import ConjugateGradientMethod from "./methods/linear_of_algebra/conjugategradie
 import GaussEliminationMethod from "./methods/linear_of_algebra/gausselimination/gausselimination";
 import GaussJordanMethod from "./methods/linear_of_algebra/gaussjordan/gaussjordan";
 import LUDecompositionMethod from "./methods/linear_of_algebra/ludecomposition/ludecomposition";
+import axios from "axios";
 
 
 // const   url:string = "https://my-json-server.typicode.com/beeba3033/numerical-methods-server/db" ;
 
 function App() {
     let path:string = JSON.stringify(process.env.REACT_APP_PATH),
+        login:string = JSON.stringify(process.env.REACT_APP_LOGIN),
         key:string = JSON.stringify(process.env.REACT_APP_KEY),
         regex = /"/g;
+    let email:string = JSON.stringify(process.env.REACT_APP_EMAIL),
+        password:string = JSON.stringify(process.env.REACT_APP_PASSWORD);
     let pathRegex:string = path.replace(regex,''),
-        keyRegex:string = key.replace(regex,'');
+        keyRegex:string = key.replace(regex,''),
+        loginRegex:string = login.replace(regex,''),
+        emailRegex:string = email.replace(regex,''),
+        passwordRegex:string = password.replace(regex,'');
     let [Problems,setProblem] = useState([]),
         State_of_Numerical:StateNumerical = {
             Epsilon:Math.pow(10,-6),
@@ -70,7 +77,13 @@ function App() {
             Token:keyRegex
         } ;
     useEffect( ()=>{
-
+        axios.post(loginRegex, {
+            "email": emailRegex,
+            "password": passwordRegex
+        })
+            .then(res => {
+                State_of_Numerical.Token = res.data.accessToken.replace(regex,'')
+            })
     },[]);
     return (
         <div className="App">
