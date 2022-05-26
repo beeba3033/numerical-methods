@@ -20,7 +20,7 @@ test('Component: Bisection',async () => {
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
   unmountComponentAtNode(container);
   container.remove();
-},60000);
+});
 test('Component: FalsePosition',async () => {
   const component = /FalsePosition/i;
   const {container,getByTestId} = render(<App/>)
@@ -30,7 +30,7 @@ test('Component: FalsePosition',async () => {
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
   unmountComponentAtNode(container);
   container.remove();
-},60000);
+});
 // test('Component: OnePoint',async () => {
 //   const component = /One Point/i;
 //   const {container,getByTestId} = await render(<App/>)
