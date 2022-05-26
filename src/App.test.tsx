@@ -20,8 +20,8 @@ test('Component: Bisection', () => {
   fireEvent.click(screen.getByText(component))
   // fireEvent.click(screen.getByText(/calculate/i))
   // await expect(screen.getByText('0.000001')).toBeInTheDocument();
-    unmountComponentAtNode(container);
-  container.remove();
+  //   unmountComponentAtNode(container);
+  // container.remove();
 });
 it('Component: FalsePosition',() => {
   const component = /FalsePosition/i;
