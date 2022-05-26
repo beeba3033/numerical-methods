@@ -12,8 +12,6 @@ import {
     TableRow,
     TextField
 } from "@mui/material";
-// import {DesmosChart} from "../../../components/desmoschart/desmoschart";
-// import {ApexChart} from "../../../components/apexchart/apexchart";
 import axios from "axios";
 import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
@@ -189,8 +187,6 @@ export default class NewtonRaphsonMethod extends RootEquation {
                             <Line type="monotone" dataKey="Error" stroke="#82ca9d" />
                         </LineChart>
                     </ResponsiveContainer>
-                    {/*<DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>*/}
-                    {/*<ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>*/}
                 </div>
                 <div className={"Table-Field"}>
                     <TableContainer component={Paper}>

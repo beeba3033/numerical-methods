@@ -1,6 +1,5 @@
 import RootEquation from "../rootofequation";
 import React, {ChangeEvent, FormEvent} from "react";
-import {ApexChart} from "../../../components/apexchart/apexchart";
 import {PropsMethod, PropsReportTable} from "../../methodsproperty";
 import {
     Autocomplete,
@@ -213,7 +212,6 @@ export default class FalsePositionMethod extends RootEquation{
                             <Line type="monotone" dataKey="Error" stroke="#82ca9d" />
                         </LineChart>
                     </ResponsiveContainer>
-                    {/*<ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>*/}
                 </div>
                 <div className={"Table-Field"}>
                     <TableContainer component={Paper}>

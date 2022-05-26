@@ -1,5 +1,4 @@
 import LinearAlgebra from "../linearalgebra";
-import Tex2SVG from "react-hook-mathjax";
 import {PropsMethod, PropsProblem, PropsReportTable} from "../../methodsproperty";
 import {MatrixComponent} from "../../../components/matrix/matrix";
 import {MathJax, MathJaxContext} from "better-react-mathjax";

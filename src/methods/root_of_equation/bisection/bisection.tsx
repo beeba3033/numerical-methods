@@ -1,7 +1,6 @@
 import React, {ChangeEvent, createRef, FormEvent, FunctionComponent, useRef} from "react";
 import RootEquation from "../rootofequation";
 import "./bisection.css";
-import {ApexChart} from "../../../components/apexchart/apexchart";
 import {
     Autocomplete,
     Button,

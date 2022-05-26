@@ -10,8 +10,6 @@ import {
     TableRow,
     TextField
 } from "@mui/material";
-import {DesmosChart} from "../../../components/desmoschart/desmoschart";
-import {ApexChart} from "../../../components/apexchart/apexchart";
 import React, {ChangeEvent, FormEvent} from "react";
 import {PropsMethod, PropsReportTable} from "../../methodsproperty";
 import axios from "axios";
@@ -190,8 +188,6 @@ export default class OnePointMethod extends RootEquation {
                             <Line type="monotone" dataKey="Error" stroke="#82ca9d" />
                         </LineChart>
                     </ResponsiveContainer>
-                    {/*<DesmosChart Equation={this.state.StateNumerical.Equation}></DesmosChart>*/}
-                    {/*<ApexChart Series={this.state.ApexChart.Series} Categories={this.state.ApexChart.Categories}></ApexChart>*/}
                 </div>
                 <div className={"Table-Field"}>
                     <TableContainer component={Paper}>
