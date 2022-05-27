@@ -151,13 +151,18 @@ export default class BisectionMethod extends RootEquation {
             }
         });
     }
-    componentDidMount() {
+    async componentDidMount() {
         const api = this.props.StateNumerical.Url;
-
-        axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        await axios.post(this.props.Login.pathLogin, {
+            "email": this.props.Login.email,
+            "password": this.props.Login.password
+        })
             .then(res => {
-                this.props.StateNumerical.Problem = res.data.Chapter[0].Bisection;
-                this.setState({StateNumerical:this.props.StateNumerical})
+                axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+                    .then(res => {
+                        this.props.StateNumerical.Problem = res.data.Chapter[0].Bisection;
+                        this.setState({StateNumerical:this.props.StateNumerical})
+                    })
             })
             // .then(res => {
             //     console.log(res);

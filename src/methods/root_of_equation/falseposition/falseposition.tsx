@@ -150,12 +150,24 @@ export default class FalsePositionMethod extends RootEquation{
     }
     async componentDidMount() {
         const api = this.props.StateNumerical.Url;
-        await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        await axios.post(this.props.Login.pathLogin, {
+            "email": this.props.Login.email,
+            "password": this.props.Login.password
+        })
             .then(res => {
-                console.log(res.data);
-                this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
-                this.setState({StateNumerical:this.props.StateNumerical})
-            });
+                axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+                    .then(res => {
+                        this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
+                        this.setState({StateNumerical:this.props.StateNumerical})
+                    })
+            })
+        // const api = this.props.StateNumerical.Url;
+        // await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        //     .then(res => {
+        //         console.log(res.data);
+        //         this.props.StateNumerical.Problem = res.data.Chapter[1].FalsePosition;
+        //         this.setState({StateNumerical:this.props.StateNumerical})
+        //     });
         // fetch(
         //     this.Url)
         //     .then((res) => res.json())

@@ -313,12 +313,25 @@ export default class ConjugateGradientMethod extends LinearAlgebra {
         await this.props.StateNumerical.Problem.splice(0, this.props.StateNumerical.Problem.length);
         this.setState({StateNumerical:this.props.StateNumerical});
         const api = this.props.StateNumerical.Url;
-        await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        await axios.post(this.props.Login.pathLogin, {
+            "email": this.props.Login.email,
+            "password": this.props.Login.password
+        })
             .then(res => {
-                console.log(res.data);
-                this.props.StateNumerical.Problem = res.data.Chapter[10].ConjugateGradient;
-                this.setState({StateNumerical:this.props.StateNumerical})
-            });
+                axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+                    .then(res => {
+                        this.props.StateNumerical.Problem = res.data.Chapter[10].ConjugateGradient;
+                        this.setState({StateNumerical:this.props.StateNumerical})
+                    })
+            })
+
+        // const api = this.props.StateNumerical.Url;
+        // await axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
+        //     .then(res => {
+        //         console.log(res.data);
+        //         this.props.StateNumerical.Problem = res.data.Chapter[10].ConjugateGradient;
+        //         this.setState({StateNumerical:this.props.StateNumerical})
+        //     });
         // await fetch(
         //     this.Url)
         //     .then(async (res) => await res.json())

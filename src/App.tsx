@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter , Routes , Route } from "react-router-dom";
 import BisectionMethod from "./methods/root_of_equation/bisection/bisection";
 import NestedList from "./components/customlist/customlist";
-import {PropsProblem, StateNumerical} from "./methods/methodsproperty";
+import {KeyAPI, PropsProblem, StateNumerical} from "./methods/methodsproperty";
 import FalsePositionMethod from "./methods/root_of_equation/falseposition/falseposition";
 import OnePointMethod from "./methods/root_of_equation/onepoint/onepoint";
 import NewtonRaphsonMethod from "./methods/root_of_equation/newtonraphsonn/newtonraphson";
@@ -76,14 +76,23 @@ function App() {
             Url:pathRegex,
             Token:keyRegex,
         } ;
+    let dataKey:KeyAPI = {
+        email:emailRegex,
+        password:passwordRegex,
+        pathLogin:loginRegex,
+        regex:regex
+    }
     useEffect( ()=>{
-        axios.post(loginRegex, {
-            "email": emailRegex,
-            "password": passwordRegex
-        })
-            .then(async res => {
-                State_of_Numerical.Token = await res.data.accessToken.replace(regex,'')
-            })
+        // try {
+        //     axios.post(loginRegex, {
+        //         "email": emailRegex,
+        //         "password": passwordRegex
+        //     })
+        //         .then(res => {
+        //             State_of_Numerical.Token = res.data.accessToken.replace(regex,'')
+        //         })
+        // }
+        // catch (error){}
     },[]);
     return (
         <div className="App">
@@ -92,18 +101,18 @@ function App() {
                     <NestedList></NestedList>
                     <Routes>
                         {/*<Route path={"/Service"} element={<Service/>}></Route>*/}
-                        <Route path={"/Bisection"} element={<BisectionMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/FalsePosition"} element={<FalsePositionMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/OnePoint"} element={<OnePointMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/NewtonRaphson"} element={<NewtonRaphsonMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/Secant"} element={<SecantMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/CramerRule"} element={<CramerRuleMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/GaussElimination"} element={<GaussEliminationMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/GaussJordan"} element={<GaussJordanMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical}/>}></Route>
-                        <Route path={"/LUDecomposition"} element={<LUDecompositionMethod StateNumerical={State_of_Numerical}/>}></Route>
+                        <Route path={"/Bisection"} element={<BisectionMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/FalsePosition"} element={<FalsePositionMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/OnePoint"} element={<OnePointMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/NewtonRaphson"} element={<NewtonRaphsonMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/Secant"} element={<SecantMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/CramerRule"} element={<CramerRuleMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/GaussElimination"} element={<GaussEliminationMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/GaussJordan"} element={<GaussJordanMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/JacobiIteration"} element={<JacobiIterationMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/GaussSeidelIteration"} element={<GaussSeidelIterationMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/ConjugateGradient"} element={<ConjugateGradientMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
+                        <Route path={"/LUDecomposition"} element={<LUDecompositionMethod StateNumerical={State_of_Numerical} Login={dataKey}/>}></Route>
 
                     </Routes>
                 {/*</Router>*/}

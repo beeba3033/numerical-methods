@@ -3,6 +3,7 @@ import JacobiIterationMethod from "./linear_of_algebra/jacobiIteration/jacobiIte
 
 export interface PropsMethod {
     StateNumerical:StateNumerical;
+    Login:KeyAPI;
 }
 
 //State on Custom and Method
@@ -10,6 +11,12 @@ export interface StateMethod {
     ApexChart:PropsApexChart;
     StateNumerical:StateNumerical;
     ReportTable:Array<PropsReportTable>;
+}
+export interface KeyAPI {
+    email:string;
+    password:string
+    pathLogin:string
+    regex:RegExp
 }
 export interface StateNumerical {
     Epsilon:number;
