@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {fireEvent, getByTestId, render, screen, waitFor} from '@testing-library/react';
+import {cleanup, fireEvent, getByTestId, render, screen, waitFor} from '@testing-library/react';
 import App from './App';
 import {act} from "react-dom/test-utils";
 import {unmountComponentAtNode} from "react-dom";
 import {StateNumerical} from "./methods/methodsproperty";
 import BisectionMethod from "./methods/root_of_equation/bisection/bisection";
+import {BrowserRouter, MemoryRouter, Router} from "react-router-dom";
+import {createMemoryHistory} from 'history'
 
 let path:string = JSON.stringify(process.env.REACT_APP_PATH),
     login:string = JSON.stringify(process.env.REACT_APP_LOGIN),
@@ -61,30 +63,40 @@ let State_of_Numerical:StateNumerical = {
   Token:keyRegex,
 } ;
 
-let container:any = null,
-    app:any = null;
-beforeEach(() => {
+let container:any = null;
+beforeEach(async () => {
+  cleanup();
+  jest.clearAllMocks();
   // setup a DOM element as a render target
-  app = document.createElement("div");
   container = document.createElement("div");
-  document.body.appendChild(app);
   document.body.appendChild(container);
 });
 afterEach(() => {
   // cleanup on exiting
-  unmountComponentAtNode(app);
+  document.body.removeChild(container);
   unmountComponentAtNode(container);
-  app.remove();
+
   container.remove();
-  app = null;
+  // container.quit()
+  // jest.resetModules();
+  // jest.resetModuleRegistry();
+  jest.clearAllMocks();
   container = null;
 });
+afterAll(() => {
+  cleanup();
+  jest.clearAllMocks();
+})
 test('Component: listCustom',async () => {
   let component = /Bisection/i;
-  act(()=>{
-    render(<App/>,container) ;
-    // render(<BisectionMethod StateNumerical={State_of_Numerical}/>)
-  })
+  const history:any = createMemoryHistory();
+  // act(()=>{
+   render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  // });
+
   expect(screen.getByText(/Bisection/i)).toBeInTheDocument();
   expect(screen.getByText(/FalsePosition/i)).toBeInTheDocument();
   expect(screen.getByText(/One Point/i)).toBeInTheDocument();
@@ -99,22 +111,12 @@ test('Component: listCustom',async () => {
   expect(screen.getByText(/Interpolation Techniques/i)).toBeInTheDocument();
   expect(screen.getByText(/Least-Squares/i)).toBeInTheDocument();
   expect(screen.getByText(/Numerical Intergration/i)).toBeInTheDocument();
-
-  // fireEvent.click(screen.getByText(component))
   //
-  // expect(screen.getByText(component)).toBeInTheDocument();
-  // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
-  // fireEvent.click(screen.getByText(component));
-});
+  // fireEvent.keyDown(screen.getByText(component));
+  // screen.getByText(component).focus();
+  // fireEvent.keyDown(document.activeElement || document.body);
+  // expect(screen.getByText(/Calculate/i)).toBeInTheDocument()
 
-test('Component: FalsePosition',async () => {
-  // let component = /FalsePosition/i;
-  // act(()=>{
-  //   render(<FalsePositionMethod StateNumerical={reactTesting()}/>,container) ;
-  // })
-  //
-  // await waitFor(()=> expect(screen.getByText(component)).toBeInTheDocument(),{timeout:2000});
-  // fireEvent.click(screen.getByText(component));
 });
 
 // test('Component: OnePoint',async () => {

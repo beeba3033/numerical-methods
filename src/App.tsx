@@ -1,6 +1,6 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import './App.css';
-import { BrowserRouter as Router , Routes , Route } from "react-router-dom";
+import { BrowserRouter , Routes , Route } from "react-router-dom";
 import BisectionMethod from "./methods/root_of_equation/bisection/bisection";
 import NestedList from "./components/customlist/customlist";
 import {PropsProblem, StateNumerical} from "./methods/methodsproperty";
@@ -88,7 +88,7 @@ function App() {
     return (
         <div className="App">
             <div className={"Service"}>
-                <Router>
+                {/*<Router>*/}
                     <NestedList></NestedList>
                     <Routes>
                         {/*<Route path={"/Service"} element={<Service/>}></Route>*/}
@@ -106,7 +106,7 @@ function App() {
                         <Route path={"/LUDecomposition"} element={<LUDecompositionMethod StateNumerical={State_of_Numerical}/>}></Route>
 
                     </Routes>
-                </Router>
+                {/*</Router>*/}
             </div>
         </div>
   );
