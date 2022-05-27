@@ -25,25 +25,18 @@ beforeEach(async () => {
   document.body.appendChild(container);
 });
 afterEach(async () => {
-  // cleanup on exiting
-
-  document.body.removeChild(container);
-  unmountComponentAtNode(container);
-  history.pushState(null, '', '/');
-  cleanup();
-
-  container.remove();
-  // container.quit()
-  // jest.resetModules();
-  // jest.resetModuleRegistry();
-  jest.clearAllMocks();
+  await document.body.removeChild(container);
+  await unmountComponentAtNode(container);
+  await history.pushState(null, '', '/');
+  await cleanup();
+  await container.remove();
+  await jest.clearAllMocks();
   container = null;
 });
-afterAll(() => {
-  jest.resetModules();
-  // jest.resetModuleRegistry();
-  cleanup();
-  jest.clearAllMocks();
+afterAll(async () => {
+  await jest.resetModules();
+  await cleanup();
+  await jest.clearAllMocks();
 })
 test('Component: listCustom',async () => {
   await act(()=>{
@@ -78,17 +71,17 @@ test('Component: Bisection',async () => {
           <App/>
         </BrowserRouter>,container);
   })
-  history.push('/Bisection');
-  await waitFor(()=>{expect(screen.getByText(component))},{timeout:4000});
-  await new Promise((r) => setTimeout(r, 2000));
-
-  await act(()=>{
-    render(
+  await history.push('/Bisection');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await new Promise((r) => setTimeout(r, 4000));
+    await render(
         <Router location={history.location} navigator={history}>
           <App/>
         </Router>,container);
-  })
-  await waitFor(()=>{expect(screen.getByText(/Calculate/i))},{timeout:4000});
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
 },60000);
 
 test('Component: FalsePosition',async () => {
@@ -98,16 +91,17 @@ test('Component: FalsePosition',async () => {
     render(
         <BrowserRouter>
           <App/>
-        </BrowserRouter>,container)
+        </BrowserRouter>,container);
   })
-  history.push('/FalsePosition');
-  await waitFor(()=>{expect(screen.getByText(component))},{timeout:4000});
-  await new Promise((r) => setTimeout(r, 2000));
-  await act(()=>{
-    render(
+  await history.push('/FalsePosition');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
         <Router location={history.location} navigator={history}>
           <App/>
         </Router>,container);
-  })
-  await waitFor(()=>{expect(screen.getByText(/Calculate/i))},{timeout:4000});
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
 },60000);

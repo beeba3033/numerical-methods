@@ -292,16 +292,18 @@ export default class GaussSeidelMethod extends LinearAlgebra {
         await this.componentMatrixFill();
         await this.props.StateNumerical.Problem.splice(0, this.props.StateNumerical.Problem.length);
         this.setState({StateNumerical:this.props.StateNumerical});
+
         const api = this.props.StateNumerical.Url;
+        const regex = /"/g;
         await axios.post(this.props.Login.pathLogin, {
             "email": this.props.Login.email,
             "password": this.props.Login.password
         })
-            .then(res => {
-                axios.get(api, { headers: {"Authorization" : `Bearer ${this.props.StateNumerical.Token}`} })
-                    .then(res => {
-                        this.props.StateNumerical.Problem = res.data.Chapter[9].GaussSeidel;
-                        this.setState({StateNumerical:this.props.StateNumerical})
+            .then(async res => {
+                await axios.get(api, { headers: {"Authorization" : `Bearer ${res.data.accessToken.replace(regex,'')}`} })
+                    .then(async res => {
+                        this.props.StateNumerical.Problem = await res.data.Chapter[9].GaussSeidel;
+                        await this.setState({StateNumerical:this.props.StateNumerical})
                     })
             })
 
