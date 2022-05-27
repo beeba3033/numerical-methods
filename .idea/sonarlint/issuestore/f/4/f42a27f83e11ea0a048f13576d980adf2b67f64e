@@ -1,0 +1,17 @@
+
+9typescript:S3317"%Rename this file to "BisectionMethod"
+Jtypescript:S1128")Remove this unused import of 'createRef'.(ïş¦ëøÿÿÿÿ
+Rtypescript:S1128"1Remove this unused import of 'FunctionComponent'.(ïş¦ëøÿÿÿÿ
+Gtypescript:S1128"&Remove this unused import of 'useRef'.(ïş¦ëøÿÿÿÿ
+Ltypescript:S1128"+Remove this unused import of 'FormControl'.(¶·Â›úÿÿÿÿ
+Ktypescript:S1128"*Remove this unused import of 'InputLabel'.(¶·Â›úÿÿÿÿ
+Itypescript:S1128"(Remove this unused import of 'MenuItem'.(¶·Â›úÿÿÿÿ
+Atypescript:S1128"&Remove this unused import of 'Select'.(ï´ó
+Ltypescript:S1128"1Remove this unused import of 'SelectChangeEvent'.(ï´ó
+Htypescript:S1128",Remove this unused import of 'PropsProblem'.(Ç“İ–
+9typescript:S125b"Remove this commented out code.(ô£üo
+Otypescript:S1117£"-'res' is already declared in the upper scope.(è›†Ëşÿÿÿÿ
+Stypescript:S4123¥"1Refactor this redundant 'await' on a non-promise.(âÅõÚşÿÿÿÿ
+Ltypescript:S1186¶"/Unexpected empty method 'componentWillUnmount'.(»‰¹ö
+@typescript:S125¼"Remove this commented out code.(ö©Ùãùÿÿÿÿ
+8typescript:S1116"Unnecessary semicolon.(ôŸìúÿÿÿÿ

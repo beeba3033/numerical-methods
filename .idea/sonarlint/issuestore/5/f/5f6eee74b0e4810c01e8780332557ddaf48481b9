@@ -1,0 +1,18 @@
+
+;typescript:S3317"'Rename this file to "GaussJordanMethod"
+}typescript:S41657"aReview this redundant assignment: "i" already holds the assigned value along all execution paths.(¨¿¨‡
+Atypescript:S125Š"Remove this commented out code.(œà\8ÇåÙ‰0
+Gtypescript:S125"Remove this commented out code.(µíˆñÿÿÿÿÿ8†§Ù‰0
+Btypescript:S125”"Remove this commented out code.(êúğı8†§Ù‰0
+Gtypescript:S125™"Remove this commented out code.(µíˆñÿÿÿÿÿ8‡§Ù‰0
+Gtypescript:S125"Remove this commented out code.(³À¡¢úÿÿÿÿ8‡§Ù‰0
+Gtypescript:S125¢"Remove this commented out code.(ò·ú«ùÿÿÿÿ8‡§Ù‰0
+Btypescript:S125¥"Remove this commented out code.(ó¸šè8 Ñ¬ÿ0
+ntypescript:S4138Á"LExpected a `for-of` loop instead of a `for` loop with this simple iteration.(ü¤õ»üÿÿÿÿ
+Stypescript:S4123Ì"1Refactor this redundant 'await' on a non-promise.(ìÃÃúÿÿÿÿ
+Ntypescript:S4123Í"1Refactor this redundant 'await' on a non-promise.(ù€Ì™
+Otypescript:S1117Ø"-'res' is already declared in the upper scope.(è›†Ëşÿÿÿÿ
+Stypescript:S4123Ú"1Refactor this redundant 'await' on a non-promise.(âÅõÚşÿÿÿÿ
+;typescript:S125İ"Remove this commented out code.(üãËÔ
+wtypescript:S2201‰"UConsider using "forEach" instead of "map" as its return value is not being used here.(ÊĞûØıÿÿÿÿ
+wtypescript:S2201˜"UConsider using "forEach" instead of "map" as its return value is not being used here.(ÊĞûØıÿÿÿÿ
