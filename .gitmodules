@@ -1,0 +1,4 @@
+[submodule "numerical-methods"]
+	path = numerical-methods
+	url = https://github.com/beeba3033/numerical-methods.git
+	branch = master
