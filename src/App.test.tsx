@@ -171,3 +171,135 @@ test('Component: Secant',async () => {
     fireEvent.click(screen.getByText(/CALCULATE/i));
   },{timeout:8200})
 },60000);
+
+test('Component: CramerRule',async () => {
+  let component = /Cramer's Rule/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/CramerRule');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: GaussElimination',async () => {
+  let component = /Gauss Elimination/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/GaussElimination');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: GaussJordan',async () => {
+  let component = /Gauss Jordan/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/GaussJordan');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: Jacobi',async () => {
+  let component = /Jacobi/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/JacobiIteration');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: GaussSeidel',async () => {
+  let component = /Gauss-Seidel/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/GaussSeidelIteration');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: ConjugateGradient',async () => {
+  let component = /Conjugate/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/ConjugateGradient');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
