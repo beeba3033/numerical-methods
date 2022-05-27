@@ -105,3 +105,69 @@ test('Component: FalsePosition',async () => {
     fireEvent.click(screen.getByText(/CALCULATE/i));
   },{timeout:8200})
 },60000);
+
+test('Component: OnePoint',async () => {
+  let component = /One Point/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/OnePoint');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: NewtonRaphson',async () => {
+  let component = /Newton Raphson/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/NewtonRaphson');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
+
+test('Component: Secant',async () => {
+  let component = /Secant/i;
+  const history:any = createMemoryHistory();
+  await act(()=>{
+    render(
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>,container);
+  })
+  await history.push('/Secant');
+  await waitFor(async ()=>{
+    // await act(()=>{
+    await new Promise((r) => setTimeout(r, 4000));
+    expect(screen.getByText(component)).toBeInTheDocument();
+    await render(
+        <Router location={history.location} navigator={history}>
+          <App/>
+        </Router>,container);
+    fireEvent.click(screen.getByText(/CALCULATE/i));
+  },{timeout:8200})
+},60000);
