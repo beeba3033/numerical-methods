@@ -1,0 +1,3 @@
+[submodule "server"]
+  path = path_to_submodule
+  url = https://github.com/beeba3033/numerical-methods.git
